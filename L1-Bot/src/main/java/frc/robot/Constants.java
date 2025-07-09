@@ -28,8 +28,8 @@ public final class Constants {
     public static final double INTAKE_kP = 0.0;
     public static final double INTAKE_kI = 0.0;
     public static final double INTAKE_kD = 0.0;
-    public static final int COLOR_SENSOR = 1;
-    public static final double INTAKE_VOLTAGE = 1.0;
+    public static final int COLOR_SENSOR = 4;
+    public static final double INTAKE_VOLTAGE = 0.5;
     public static final double HOLD_PIECE_VOLTAGE = 0.1;
     public static final double PROXIMITY = 0.055;
   }
