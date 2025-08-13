@@ -5,14 +5,18 @@
 package frc.robot.command_factories;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
+
+import static frc.robot.util.Subsystem.intake;
 
 import static frc.robot.Constants.IntakeConstants.*;
 
 /** Add your docs here. */
 public class IntakeFactory {
-
     public static Command runIntake() {
-        return RobotContainer.intake.runIntake(INTAKE_VOLTAGE).until(() -> RobotContainer.intake.hasCoral());
+        return intake.runIntake(INTAKE_VOLTAGE).until(() -> intake.hasCoral());
+    }
+
+    public static Command runOuttake() {
+        return intake.runIntake(OUTTAKE_VOLTAGE);
     }
 }
