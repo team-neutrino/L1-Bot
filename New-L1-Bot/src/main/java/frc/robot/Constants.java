@@ -31,7 +31,7 @@ public final class Constants {
         public static final double ARM_kD = 0.0;
         public static final double INTAKE_POSITION = 20.0;
         public static final double SCORE_POSITION = 240.0;
-        public static final double FFCONSTANT = 0.2;
+        public static final double FFCONSTANT = 0.05;
         public static final double ALLOWED_ERROR = 0.5;
         public static final double GAIN_THRESHOLD = 6.0;
         public static final double START_POSITION = 270.0;
