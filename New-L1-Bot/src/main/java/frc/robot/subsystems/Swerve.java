@@ -7,17 +7,14 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.generated.CommandSwerveDrivetrain;
-import frc.robot.util.generated.CommandSwerveDrivetrain.*;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.ctre.phoenix6.CANBus;
-import com.ctre.phoenix6.hardware.Pigeon2;
+import frc.robot.util.generated.TunerConstants;
 
 import edu.wpi.first.math.MathUtil;
 
 public class Swerve extends CommandSwerveDrivetrain {
 
   public Swerve() {
+    super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight, TunerConstants.BackLeft, TunerConstants.BackRight);
     resetRotation(Rotation2d.fromDegrees(getYawDegrees()));
   }
 
