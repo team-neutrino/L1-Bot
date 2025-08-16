@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Arm extends SubsystemBase {
-  /** Creates a new Arm. */
   private final CANBus m_CANBus = new CANBus("rio");
   private TalonFX m_motor = new TalonFX(ARM_MOTOR_ID, m_CANBus);
   private TalonFXConfiguration m_motorConfig = new TalonFXConfiguration();
@@ -96,7 +95,7 @@ public class Arm extends SubsystemBase {
    * Gives a instance of the arm default command. Rotates the arm to the default
    * position
    * 
-   * @return The rotate wrist command
+   * @return Arm default command
    */
   public Command armDefaultCommand() {
     return run(() -> {
