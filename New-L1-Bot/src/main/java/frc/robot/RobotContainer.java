@@ -22,6 +22,7 @@ import frc.robot.command_factories.SuperstructureFactory;
 import frc.robot.util.generated.CommandSwerveDrivetrain;
 import frc.robot.util.generated.TunerConstants;
 import static frc.robot.util.Subsystem.intake;
+import static frc.robot.util.Subsystem.swerve;
 import static frc.robot.util.Subsystem.arm;
 
 public class RobotContainer {
@@ -77,22 +78,7 @@ public class RobotContainer {
         RobotModeTriggers.disabled().whileTrue(
                 drivetrain.applyRequest(() -> idle).ignoringDisable(true));
 
-        m_driverController.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        m_driverController.b().whileTrue(drivetrain.applyRequest(
-                () -> point.withModuleDirection(
-                        new Rotation2d(-m_driverController.getLeftY(), -m_driverController.getLeftX()))));
-
-        // Run SysId routines when holding back/start and X/Y.
-        // Note that each routine should be run exactly once in a single log.
-        m_driverController.back().and(m_driverController.y()).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        m_driverController.back().and(m_driverController.x()).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-        m_driverController.start().and(m_driverController.y())
-                .whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        m_driverController.start().and(m_driverController.x())
-                .whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
-
-        // reset the field-centric heading on left bumper press
-        m_driverController.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        m_driverController.back().whileTrue(swerve.resetYawCommand());
 
         drivetrain.registerTelemetry(logger::telemeterize);
 
