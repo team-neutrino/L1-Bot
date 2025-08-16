@@ -15,13 +15,7 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.math.MathUtil;
 
-public class Swerve extends SubsystemBase {
-  private final CANBus m_CANBus = new CANBus("rio");
-  public Pigeon2 pigeon = new Pigeon2(1, m_CANBus);
-
-  public final Pigeon2 getPigeon2() {
-    return 
-  }
+public class Swerve extends CommandSwerveDrivetrain {
 
   public Swerve() {
     resetRotation(Rotation2d.fromDegrees(getYawDegrees()));
@@ -50,5 +44,6 @@ public class Swerve extends SubsystemBase {
 
   @Override
   public void periodic() {
+    super.periodic();
   }
 }
