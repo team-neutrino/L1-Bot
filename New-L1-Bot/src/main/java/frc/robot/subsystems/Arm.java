@@ -25,6 +25,8 @@ public class Arm extends SubsystemBase {
   private double m_motorVoltage;
   private double m_targetAngle = START_POSITION;
   private double m_FFConstant = FFCONSTANT;
+  private PositionVoltage positionControl = new PositionVoltage(m_targetAngle)
+      .withFeedForward(feedForwardCalculation());
 
   public Arm() {
     m_currentLimitConfig.withSupplyCurrentLimit(ARM_CURRENT_LIMIT)
@@ -65,10 +67,6 @@ public class Arm extends SubsystemBase {
     return Math.abs(getAngle() - m_targetAngle) <= ALLOWED_ERROR;
   }
 
-  private boolean nearTargetAngle() {
-    return Math.abs(getAngle() - m_targetAngle) <= GAIN_THRESHOLD;
-  }
-
   public boolean readyToScore() {
     return atTargetAngle() && !(m_targetAngle == INTAKE_POSITION);
   }
@@ -94,10 +92,8 @@ public class Arm extends SubsystemBase {
   }
 
   public void setFeedForward() {
-    PositionVoltage positionControl = new PositionVoltage(m_targetAngle).withFeedForward(feedForwardCalculation());
     m_motor.setControl(positionControl);
   }
-  
 
   public void changeFF(double newFF) {
     m_FFConstant = newFF;
