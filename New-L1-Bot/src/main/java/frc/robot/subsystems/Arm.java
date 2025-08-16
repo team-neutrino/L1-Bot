@@ -22,10 +22,9 @@ public class Arm extends SubsystemBase {
   private TalonFX m_motor = new TalonFX(ARM_MOTOR_ID, m_CANBus);
   private TalonFXConfiguration m_motorConfig = new TalonFXConfiguration();
   private final CurrentLimitsConfigs m_currentLimitConfig = new CurrentLimitsConfigs();
-  private double m_motorVoltage;
   private double m_targetAngle = START_POSITION;
-  private double m_FFConstant = FFCONSTANT;
-  private PositionVoltage positionControl = new PositionVoltage(m_targetAngle)
+  private double m_FFConstant = FF_CONSTANT;
+  private PositionVoltage m_positionControl = new PositionVoltage(m_targetAngle)
       .withFeedForward(feedForwardCalculation());
 
   public Arm() {
@@ -43,18 +42,10 @@ public class Arm extends SubsystemBase {
     m_motor.getConfigurator().apply(m_motorConfig);
   }
 
-  /**
-   * Returns the actual angle of the arm in degrees with 180 as vertical pointing
-   * up and 90 pointing forward
-   */
   public double getAngle() {
     return m_motor.getPosition().getValueAsDouble();
   }
 
-  /**
-   * Returns the target angle of the arm in degrees with 180 as vertical pointing
-   * up and 90 pointing forward
-   */
   public double getTargetAngle() {
     return m_targetAngle;
   }
@@ -80,7 +71,7 @@ public class Arm extends SubsystemBase {
   }
 
   /**
-   * Determines the necessary volts needed for the Feedforward. Used to pass into
+   * Determines the necessary voltage needed for Feedforward. Used to pass into
    * closed loop controller
    * 
    * @return volts
@@ -91,22 +82,13 @@ public class Arm extends SubsystemBase {
     return volts;
   }
 
-  public void setFeedForward() {
-    m_motor.setControl(positionControl);
-  }
-
   public void changeFF(double newFF) {
     m_FFConstant = newFF;
   }
 
-  public void setVoltage(double volts) {
-    m_motorVoltage = volts;
-  }
-
   @Override
   public void periodic() {
-    m_motor.set(m_motorVoltage);
-    setFeedForward();
+    m_motor.setControl(m_positionControl.withPosition(m_targetAngle));
   }
 
   /**
