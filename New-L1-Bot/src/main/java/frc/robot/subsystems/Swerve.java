@@ -6,15 +6,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.util.generated.CommandSwerveDrivetrain;
 import frc.robot.util.generated.TunerConstants;
 
+import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveRequest;
+
 import edu.wpi.first.math.MathUtil;
+
+import static frc.robot.Constants.SwerveConstants.*;
 
 public class Swerve extends CommandSwerveDrivetrain {
 
   public Swerve() {
-    super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight, TunerConstants.BackLeft, TunerConstants.BackRight);
+    super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
+        TunerConstants.BackLeft, TunerConstants.BackRight);
     resetRotation(Rotation2d.fromDegrees(getYawDegrees()));
   }
 
@@ -37,6 +44,18 @@ public class Swerve extends CommandSwerveDrivetrain {
 
   public Command resetYawCommand() {
     return run(() -> resetYaw());
+  }
+
+  public Command defaultCommand(CommandXboxController driverController) {
+    return applyRequest(() -> SwerveRequestStash.drive.withVelocityX(-driverController.getLeftY() * MAX_SPEED)
+        .withVelocityY(-driverController.getLeftX() * MAX_SPEED)
+        .withRotationalRate(-driverController.getRightX() * MAX_ANGULAR_RATE));
+  }
+
+  public class SwerveRequestStash {
+    public static final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+        .withDeadband(MAX_SPEED * 0.1).withRotationalDeadband(MAX_ANGULAR_RATE * 0.1)
+        .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
   }
 
   @Override

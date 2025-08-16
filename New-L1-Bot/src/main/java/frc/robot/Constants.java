@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.*;
+
+import frc.robot.util.generated.TunerConstants;
+
 public final class Constants {
 
     public static class OperatorConstants {
@@ -36,5 +40,10 @@ public final class Constants {
         public static final double GAIN_THRESHOLD = 6.0;
         public static final double START_POSITION = 270.0;
         public static final double TOLERANCE = 2.0;
+    }
+
+    public static class SwerveConstants {
+        public static final double MAX_SPEED = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
+        public static final double MAX_ANGULAR_RATE = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
     }
 }

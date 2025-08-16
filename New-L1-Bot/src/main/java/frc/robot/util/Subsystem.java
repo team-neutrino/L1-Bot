@@ -12,5 +12,5 @@ import frc.robot.subsystems.Swerve;
 public class Subsystem {
     public static final Intake intake = new Intake();
     public static final Arm arm = new Arm();
-    public static final Swerve swerve = null;
+    public static final Swerve swerve = new Swerve();
 }
