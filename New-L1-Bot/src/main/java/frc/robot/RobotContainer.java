@@ -22,6 +22,7 @@ import frc.robot.command_factories.SuperstructureFactory;
 import frc.robot.util.generated.CommandSwerveDrivetrain;
 import frc.robot.util.generated.TunerConstants;
 import static frc.robot.util.Subsystem.intake;
+import static frc.robot.util.Subsystem.swerve;
 import static frc.robot.util.Subsystem.arm;
 
 public class RobotContainer {
@@ -93,6 +94,7 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         m_driverController.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        m_driverController.rightBumper().whileTrue(swerve.resetYawCommand());
 
         drivetrain.registerTelemetry(logger::telemeterize);
 
