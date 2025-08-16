@@ -40,6 +40,7 @@ public class Arm extends SubsystemBase {
 
     m_motor.setNeutralMode(NeutralModeValue.Brake);
     m_motor.getConfigurator().apply(m_motorConfig);
+    m_motor.setPosition(START_POSITION);
   }
 
   public double getAngle() {
@@ -88,7 +89,7 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_motor.setControl(m_positionControl.withPosition(m_targetAngle));
+    m_motor.setControl(m_positionControl.withPosition(m_targetAngle).withFeedForward(feedForwardCalculation()));
   }
 
   /**
