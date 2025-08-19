@@ -39,6 +39,7 @@ public class Arm extends SubsystemBase {
 
     m_motor.setNeutralMode(NeutralModeValue.Brake);
     m_motor.getConfigurator().apply(m_motorConfig);
+    m_motor.setPosition(START_POSITION / 360);
   }
 
   /**
@@ -46,7 +47,7 @@ public class Arm extends SubsystemBase {
    * up and 90 pointing forward
    */
   public double getAngle() {
-    return m_motor.getPosition().getValueAsDouble();
+    return m_motor.getPosition().getValueAsDouble() * 360.0;
   }
 
   /**
@@ -94,7 +95,8 @@ public class Arm extends SubsystemBase {
   }
 
   public void setFeedForward() {
-    PositionVoltage positionControl = new PositionVoltage(m_targetAngle).withFeedForward(feedForwardCalculation());
+    double targetRotations = m_targetAngle / 360.0;
+    PositionVoltage positionControl = new PositionVoltage(targetRotations).withFeedForward(feedForwardCalculation());
     m_motor.setControl(positionControl);
   }
   
@@ -109,7 +111,7 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_motor.set(m_motorVoltage);
+    m_motor.setVoltage(m_motorVoltage);
     setFeedForward();
   }
 
