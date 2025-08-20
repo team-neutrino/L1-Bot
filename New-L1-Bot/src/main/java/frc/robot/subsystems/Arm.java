@@ -37,9 +37,12 @@ public class Arm extends SubsystemBase {
     m_motorConfig.Slot0.kI = ARM_kI;
     m_motorConfig.Slot0.kD = ARM_kD;
 
-    m_motor.setNeutralMode(NeutralModeValue.Brake);
+    m_motor.setNeutralMode(NeutralModeValue.Coast);
+    m_motorConfig.Feedback.SensorToMechanismRatio = 0.57;
+    //8/4.22 = 1.8957
+    //4.22/8 = 0.5275
     m_motor.getConfigurator().apply(m_motorConfig);
-    m_motor.setPosition(START_POSITION / 360);
+    m_motor.setPosition(START_POSITION);
   }
 
   /**
@@ -47,7 +50,7 @@ public class Arm extends SubsystemBase {
    * up and 90 pointing forward
    */
   public double getAngle() {
-    return m_motor.getPosition().getValueAsDouble() * 360.0;
+    return m_motor.getPosition().getValueAsDouble();
   }
 
   /**
@@ -99,7 +102,6 @@ public class Arm extends SubsystemBase {
     PositionVoltage positionControl = new PositionVoltage(targetRotations).withFeedForward(feedForwardCalculation());
     m_motor.setControl(positionControl);
   }
-  
 
   public void changeFF(double newFF) {
     m_FFConstant = newFF;
@@ -113,6 +115,7 @@ public class Arm extends SubsystemBase {
   public void periodic() {
     m_motor.setVoltage(m_motorVoltage);
     setFeedForward();
+    System.out.println("Arm angle: " + getAngle());
   }
 
   /**
