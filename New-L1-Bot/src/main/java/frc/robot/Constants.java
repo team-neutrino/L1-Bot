@@ -30,15 +30,15 @@ public final class Constants {
     public static class ArmConstants {
         public static final int ARM_MOTOR_ID = 3;
         public static final int ARM_CURRENT_LIMIT = 40;
-        public static final double ARM_kP = 0.0;
+        public static final double ARM_kP = 0.5;
         public static final double ARM_kI = 0.0;
         public static final double ARM_kD = 0.0;
-        public static final double INTAKE_POSITION = 280.0;
-        public static final double SCORE_POSITION = 10.0;
-        public static final double FFCONSTANT = 0.05;
+        public static final double INTAKE_POSITION = 238;
+        public static final double SCORE_POSITION = 15.0;
+        public static final double FFCONSTANT = 0.25;
         public static final double ALLOWED_ERROR = 0.5;
         public static final double GAIN_THRESHOLD = 6.0;
-        public static final double START_POSITION = 0.0;
+        public static final double START_POSITION = -7.0;
         public static final double TOLERANCE = 2.0;
     }
 
