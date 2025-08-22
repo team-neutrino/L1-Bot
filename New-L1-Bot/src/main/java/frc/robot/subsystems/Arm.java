@@ -92,14 +92,13 @@ public class Arm extends SubsystemBase {
    * @return volts
    */
   private double feedForwardCalculation() {
-    double currentAngle = (getAngle() - 90) * (Math.PI / 180);
+    double currentAngle = getAngle() * (Math.PI / 180);
     double volts = m_FFConstant * Math.cos(currentAngle);
     return volts;
   }
 
   public void setFeedForward() {
-    double targetRotations = m_targetAngle / 360.0;
-    PositionVoltage positionControl = new PositionVoltage(targetRotations).withFeedForward(feedForwardCalculation());
+    PositionVoltage positionControl = new PositionVoltage(m_targetAngle).withFeedForward(feedForwardCalculation());
     m_motor.setControl(positionControl);
   }
 
@@ -116,6 +115,7 @@ public class Arm extends SubsystemBase {
     m_motor.setVoltage(m_motorVoltage);
     setFeedForward();
     System.out.println("Arm angle: " + getAngle());
+    System.out.println("Feedforward: " + feedForwardCalculation());
   }
 
   /**
