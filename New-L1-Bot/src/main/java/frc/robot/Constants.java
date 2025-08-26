@@ -46,4 +46,14 @@ public final class Constants {
         public static final double MAX_SPEED = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         public static final double MAX_ANGULAR_RATE = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
     }
+
+    public static class LimelightConstants {
+        public static final String REEF_CAMERA = "limelight-lemon";
+        public static final double CAMERA_FORWARD_OFFSET = 0;
+        public static final double CAMERA_HEIGHT_OFFSET = 0;
+        public static final double CAMERA_PITCH_OFFSET = 0;
+        public static final double CAMERA_ROLL_OFFSET = 0;
+        public static final double CAMERA_SIDE_OFFSET = 0;
+        public static final double CAMERA_YAW_OFFSET = 0;
+    }
 }
