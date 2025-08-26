@@ -6,9 +6,11 @@ package frc.robot.util;
 
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Swerve;
 
 /** Add your docs here. */
 public class Subsystem {
     public static final Intake intake = new Intake();
     public static final Arm arm = new Arm();
+    public static final Swerve swerve = new Swerve();
 }
