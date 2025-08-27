@@ -37,15 +37,17 @@ public class Limelight extends SubsystemBase {
 
   private void updateOdometry() {
     Subsystem.swerve.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
-    LimelightHelpers.PoseEstimate limePoseEst = LimelightHelpers
-        .getBotPoseEstimate_wpiBlue_MegaTag2(REEF_CAMERA);
-    double frame = getFrame(REEF_CAMERA);
-    if (limePoseEst != null && limePoseEst.tagCount != 0
-        && m_swerve.getState().Speeds.omegaRadiansPerSecond < 4 * Math.PI
-        && frame > m_lastFrame) {
-      m_swerve.addVisionMeasurement(limePoseEst.pose, limePoseEst.timestampSeconds);
+    if (getTv() && Subsystem.intake.hasCoral()) {
+      LimelightHelpers.PoseEstimate limePoseEst = LimelightHelpers
+          .getBotPoseEstimate_wpiBlue_MegaTag2(REEF_CAMERA);
+      double frame = getFrame(REEF_CAMERA);
+      if (limePoseEst != null && limePoseEst.tagCount != 0
+          && m_swerve.getState().Speeds.omegaRadiansPerSecond < 4 * Math.PI
+          && frame > m_lastFrame) {
+        m_swerve.addVisionMeasurement(limePoseEst.pose, limePoseEst.timestampSeconds);
+      }
+      m_lastFrame = frame;
     }
-    m_lastFrame = frame;
   }
 
   private boolean getTv() {
