@@ -36,8 +36,8 @@ public class Limelight extends SubsystemBase {
   }
 
   private void updateOdometry() {
-    Subsystem.swerve.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
-    if (getTv() && Subsystem.intake.hasCoral()) {
+    m_swerve.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
+    if (getTv()) {
       LimelightHelpers.PoseEstimate limePoseEst = LimelightHelpers
           .getBotPoseEstimate_wpiBlue_MegaTag2(REEF_CAMERA);
       double frame = getFrame(REEF_CAMERA);
