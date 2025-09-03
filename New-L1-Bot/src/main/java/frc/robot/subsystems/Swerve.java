@@ -18,6 +18,8 @@ import edu.wpi.first.math.MathUtil;
 import static frc.robot.Constants.SwerveConstants.*;
 
 public class Swerve extends CommandSwerveDrivetrain {
+  private boolean m_isDrivingToPoint;
+  private boolean m_isAtPoint;
 
   public Swerve() {
     super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
@@ -44,6 +46,22 @@ public class Swerve extends CommandSwerveDrivetrain {
 
   public Command resetYawCommand() {
     return run(() -> resetYaw());
+  }
+
+  public void setDrivingToPoint(boolean isDrivingToPoint) {
+    m_isDrivingToPoint = isDrivingToPoint;
+  }
+
+  public boolean getDrivingToPoint() {
+    return m_isDrivingToPoint;
+  }
+
+  public void setAtPoint(boolean isAtPoint) {
+    m_isAtPoint = isAtPoint;
+  }
+
+  public boolean getAtPoint() {
+    return m_isAtPoint;
   }
 
   public Command defaultCommand(CommandXboxController driverController) {
