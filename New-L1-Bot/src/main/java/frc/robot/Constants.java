@@ -6,6 +6,12 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import java.util.List;
+
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.geometry.Pose2d;
+import frc.robot.commands.DriveToPoint;
 import frc.robot.util.generated.TunerConstants;
 
 public final class Constants {
@@ -62,6 +68,9 @@ public final class Constants {
     }
 
     public static class DriveToPointConstants {
+        public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout
+                .loadField(AprilTagFields.k2025ReefscapeAndyMark);
+
         public static final double PARALLEL_OFFSET = 0;
         public static final double PERPENDICULAR_OFFSET = 0;
         public static final double REEF_WIDTH = 0.33;
@@ -69,6 +78,44 @@ public final class Constants {
         public static final double DRIVE_TO_POINT_I = 0;
         public static final double DRIVE_TO_POINT_D = 0;
         public static final double MAX_DRIVETOPOINT_SPEED = 5;
+
+        public static final Pose2d RED_REEF_6A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(6).get(), true);
+        public static final Pose2d RED_REEF_6B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(6).get(), false);
+        public static final Pose2d RED_REEF_7A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(7).get(), true);
+        public static final Pose2d RED_REEF_7B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(7).get(), false);
+        public static final Pose2d RED_REEF_8A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(8).get(), true);
+        public static final Pose2d RED_REEF_8B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(8).get(), false);
+        public static final Pose2d RED_REEF_9A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(9).get(), true);
+        public static final Pose2d RED_REEF_9B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(9).get(), false);
+        public static final Pose2d RED_REEF_10A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(10).get(), true);
+        public static final Pose2d RED_REEF_10B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(10).get(), false);
+        public static final Pose2d RED_REEF_11A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(11).get(), true);
+        public static final Pose2d RED_REEF_11B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(11).get(), false);
+
+        public static final Pose2d BLUE_REEF_17A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(17).get(),
+                false);
+        public static final Pose2d BLUE_REEF_17B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(17).get(), true);
+        public static final Pose2d BLUE_REEF_18A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(18).get(),
+                false);
+        public static final Pose2d BLUE_REEF_18B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(18).get(), true);
+        public static final Pose2d BLUE_REEF_19A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(19).get(),
+                false);
+        public static final Pose2d BLUE_REEF_19B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(19).get(), true);
+        public static final Pose2d BLUE_REEF_20A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(20).get(),
+                false);
+        public static final Pose2d BLUE_REEF_20B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(20).get(), true);
+        public static final Pose2d BLUE_REEF_21A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(21).get(),
+                false);
+        public static final Pose2d BLUE_REEF_21B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(21).get(), true);
+        public static final Pose2d BLUE_REEF_22A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(22).get(),
+                false);
+        public static final Pose2d BLUE_REEF_22B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(22).get(), true);
+
+        public static final List<Pose2d> TARGET_POSES = List.of(
+                RED_REEF_6A, RED_REEF_6B, RED_REEF_7A, RED_REEF_7B, RED_REEF_8A, RED_REEF_8B, RED_REEF_9A, RED_REEF_9B,
+                RED_REEF_10A, RED_REEF_10B, RED_REEF_11A, RED_REEF_11B, BLUE_REEF_17A, BLUE_REEF_17B,
+                BLUE_REEF_18A, BLUE_REEF_18B, BLUE_REEF_19A, BLUE_REEF_19B, BLUE_REEF_20A,
+                BLUE_REEF_20B, BLUE_REEF_21A, BLUE_REEF_21B, BLUE_REEF_22A, BLUE_REEF_22B);
     }
 
     public static class AprilTagConstants {

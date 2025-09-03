@@ -11,7 +11,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Swerve;
-import frc.robot.subsystems.Swerve.SwerveRequestStash;
 import frc.robot.util.DriveToPointPID;
 import frc.robot.util.Subsystem;
 
@@ -49,7 +48,7 @@ public class DriveToPoint extends Command {
     return false;
   }
 
-  private Pose2d calculatePoint(Pose3d tagPose, boolean isPointA) {
+  public static Pose2d calculatePoint(Pose3d tagPose, boolean isPointA) {
     double tagAngle = tagPose.getRotation().getAngle();
     double perpendicularTagAngle = tagAngle - Math.toRadians(90);
     double leftRightOffsetX = PARALLEL_OFFSET
@@ -66,7 +65,7 @@ public class DriveToPoint extends Command {
   }
 
   private void setTarget() {
-
+    m_pointControl.setTargetNearest(TARGET_POSES);
   }
 
   private void drive() {
