@@ -4,30 +4,52 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Swerve;
+import frc.robot.util.Subsystem;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
+import static frc.robot.Constants.DriveToPointConstants.*;
+
 public class DriveToPoint extends Command {
-  /** Creates a new DriveToPoint. */
+  Swerve m_swerve;
+
   public DriveToPoint() {
-    // Use addRequirements() here to declare subsystem dependencies.
+    m_swerve = Subsystem.swerve;
   }
 
-  // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+  }
 
-  // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public Pose2d calculatePoint(Pose3d tagPose, boolean isPointA) {
+    double tagAngle = tagPose.getRotation().getAngle();
+    double perpendicularTagAngle = tagAngle - Math.toRadians(90);
+    double leftRightOffsetX = PARALLEL_OFFSET
+        * Math.cos(perpendicularTagAngle)
+        + (REEF_WIDTH / 2) * Math.cos(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+    double leftRightOffsetY = PARALLEL_OFFSET
+        * Math.sin(perpendicularTagAngle)
+        + (REEF_WIDTH / 2) * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+
+    double x = tagPose.getX() + PERPENDICULAR_OFFSET * Math.cos(tagAngle) + leftRightOffsetX;
+    double y = tagPose.getY() + PERPENDICULAR_OFFSET * Math.sin(tagAngle) + leftRightOffsetY;
+
+    return new Pose2d(x, y, Rotation2d.fromRadians(tagAngle + Math.PI));
   }
 }
