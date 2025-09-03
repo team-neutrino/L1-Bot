@@ -4,12 +4,14 @@
 
 package frc.robot.commands;
 
+import java.util.List;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 import frc.robot.util.DriveToPointPID;
 import frc.robot.util.Subsystem;
@@ -20,6 +22,7 @@ public class DriveToPoint extends Command {
   Swerve m_swerve;
   CommandXboxController m_driverController;
   DriveToPointPID m_pointControl;
+  List<Pose2d> m_localList;
 
   public DriveToPoint(CommandXboxController driverController) {
     m_swerve = Subsystem.swerve;
@@ -65,7 +68,22 @@ public class DriveToPoint extends Command {
   }
 
   private void setTarget() {
-    m_pointControl.setTargetNearest(TARGET_POSES);
+    m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
+  }
+
+  /*
+   * Must be called after target has been set.
+   */
+  private void setLocalList() {
+    Pose2d target = m_pointControl.getTarget();
+    if (RED_REEF.contains(target)) {
+      m_localList = RED_REEF;
+      return;
+    }
+    if (BLUE_REEF.contains(target)) {
+      m_localList = BLUE_REEF;
+      return;
+    }
   }
 
   private void drive() {
