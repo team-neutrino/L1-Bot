@@ -4,13 +4,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.util.generated.CommandSwerveDrivetrain;
 import frc.robot.util.generated.TunerConstants;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveRequest.ForwardPerspectiveValue;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.MathUtil;
@@ -18,8 +21,8 @@ import edu.wpi.first.math.MathUtil;
 import static frc.robot.Constants.SwerveConstants.*;
 
 public class Swerve extends CommandSwerveDrivetrain {
-  private boolean m_isDrivingToPoint;
-  private boolean m_isAtPoint;
+  private boolean m_isDrivingToPoint = false;
+  private boolean m_isAtPoint = false;
 
   public Swerve() {
     super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
@@ -60,8 +63,12 @@ public class Swerve extends CommandSwerveDrivetrain {
     m_isAtPoint = isAtPoint;
   }
 
-  public boolean getAtPoint() {
+  public boolean isAtPoint() {
     return m_isAtPoint;
+  }
+
+  public Pose2d getCurrentPose() {
+    return getState().Pose;
   }
 
   public Command defaultCommand(CommandXboxController driverController) {
@@ -70,10 +77,20 @@ public class Swerve extends CommandSwerveDrivetrain {
         .withRotationalRate(-driverController.getRightX() * MAX_ANGULAR_RATE));
   }
 
+  public void setVelocity(double xVelocity, double yVelocity, Rotation2d targetDirection) {
+    SwerveRequestStash.driveWithVelocity
+        .withVelocityX(xVelocity)
+        .withVelocityY(yVelocity)
+        .withTargetDirection(targetDirection);
+    setControl(SwerveRequestStash.driveWithVelocity);
+  }
+
   public class SwerveRequestStash {
     public static final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
         .withDeadband(MAX_SPEED * 0.1).withRotationalDeadband(MAX_ANGULAR_RATE * 0.1)
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
+    public static final SwerveRequest.FieldCentricFacingAngle driveWithVelocity = new SwerveRequest.FieldCentricFacingAngle()
+        .withDriveRequestType(DriveRequestType.Velocity).withForwardPerspective(ForwardPerspectiveValue.BlueAlliance);
   }
 
   @Override
