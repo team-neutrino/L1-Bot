@@ -71,6 +71,11 @@ public class DriveToPoint extends Command {
     m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
   }
 
+  private void checkBumpers() {
+    boolean isLeftPressed = m_driverController.getHID().getLeftBumperButton();
+    boolean isRightPressed = m_driverController.getHID().getRightBumperButton();
+  }
+
   /*
    * Must be called after target has been set.
    */
