@@ -61,6 +61,12 @@ public final class Constants {
         public static final double CAMERA_YAW_OFFSET = 0;
     }
 
+    public static class DriveToPointConstants {
+        public static final double PARALLEL_OFFSET = 0;
+        public static final double PERPENDICULAR_OFFSET = 0;
+        public static final double REEF_WIDTH = 0.33;
+    }
+
     public static class AprilTagConstants {
         public final class RED_ALLIANCE_IDS {
             public static final int SOURCE = 1;
