@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.Swerve;
 import frc.robot.util.Subsystem;
 
@@ -15,13 +16,17 @@ import static frc.robot.Constants.DriveToPointConstants.*;
 
 public class DriveToPoint extends Command {
   Swerve m_swerve;
+  CommandXboxController m_driverController;
 
-  public DriveToPoint() {
+  public DriveToPoint(CommandXboxController driverController) {
     m_swerve = Subsystem.swerve;
+    m_driverController = driverController;
+    addRequirements(m_swerve);
   }
 
   @Override
   public void initialize() {
+    m_swerve.setDrivingToPoint(true);
   }
 
   @Override
