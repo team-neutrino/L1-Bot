@@ -19,10 +19,11 @@ import frc.robot.util.Subsystem;
 import static frc.robot.Constants.DriveToPointConstants.*;
 
 public class DriveToPoint extends Command {
-  Swerve m_swerve;
-  CommandXboxController m_driverController;
-  DriveToPointPID m_pointControl;
-  List<Pose2d> m_localList;
+  private Swerve m_swerve;
+  private CommandXboxController m_driverController;
+  private DriveToPointPID m_pointControl;
+  private List<Pose2d> m_localList;
+  private boolean m_bumperWasPressed;
 
   public DriveToPoint(CommandXboxController driverController) {
     m_swerve = Subsystem.swerve;
@@ -74,6 +75,19 @@ public class DriveToPoint extends Command {
   private void checkBumpers() {
     boolean isLeftPressed = m_driverController.getHID().getLeftBumperButton();
     boolean isRightPressed = m_driverController.getHID().getRightBumperButton();
+    if (m_bumperWasPressed && (!isLeftPressed && !isRightPressed)) {
+      m_bumperWasPressed = false;
+    }
+    if (!m_bumperWasPressed) {
+      return;
+    }
+    m_bumperWasPressed = isLeftPressed || isRightPressed;
+
+    int id = m_localList.indexOf(m_pointControl.getTarget());
+    id += isLeftPressed ? -1 : isRightPressed ? 1 : 0;
+    id = id >= m_localList.size() ? 0 : id < 0 ? m_localList.size() - 1 : id;
+
+    m_pointControl.setTarget(m_localList.get(id));
   }
 
   /*
