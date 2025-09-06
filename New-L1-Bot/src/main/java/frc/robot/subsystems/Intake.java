@@ -45,6 +45,7 @@ public class Intake extends SubsystemBase {
     m_motor.getConfigurator().apply(m_motorConfig);
     m_settings.setLampLEDBrightness(0.4);
     m_proximitySensor.setSettings(m_settings);
+    m_proximitySensor.setLampLEDBrightness(0.1);
   }
 
   private boolean withinProximity(double distance) {
@@ -83,7 +84,7 @@ public class Intake extends SubsystemBase {
    */
   public Command intakeDefaultCommand() {
     return run(() -> {
-        m_motorVoltage = 0;
+      m_motorVoltage = 0;
     });
   }
 

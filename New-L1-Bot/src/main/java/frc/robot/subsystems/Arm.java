@@ -37,8 +37,12 @@ public class Arm extends SubsystemBase {
     m_motorConfig.Slot0.kI = ARM_kI;
     m_motorConfig.Slot0.kD = ARM_kD;
 
-    m_motor.setNeutralMode(NeutralModeValue.Brake);
+    m_motor.setNeutralMode(NeutralModeValue.Coast);
+    m_motorConfig.Feedback.SensorToMechanismRatio = 0.57;
+    // 8/4.22 = 1.8957
+    // 4.22/8 = 0.5275
     m_motor.getConfigurator().apply(m_motorConfig);
+    m_motor.setPosition(START_POSITION);
   }
 
   /**
@@ -88,7 +92,7 @@ public class Arm extends SubsystemBase {
    * @return volts
    */
   private double feedForwardCalculation() {
-    double currentAngle = (getAngle() - 90) * (Math.PI / 180);
+    double currentAngle = getAngle() * (Math.PI / 180);
     double volts = m_FFConstant * Math.cos(currentAngle);
     return volts;
   }
@@ -97,7 +101,6 @@ public class Arm extends SubsystemBase {
     PositionVoltage positionControl = new PositionVoltage(m_targetAngle).withFeedForward(feedForwardCalculation());
     m_motor.setControl(positionControl);
   }
-  
 
   public void changeFF(double newFF) {
     m_FFConstant = newFF;
@@ -109,7 +112,7 @@ public class Arm extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_motor.set(m_motorVoltage);
+    m_motor.setVoltage(m_motorVoltage);
     setFeedForward();
   }
 
@@ -121,7 +124,7 @@ public class Arm extends SubsystemBase {
    */
   public Command armDefaultCommand() {
     return run(() -> {
-      m_targetAngle = START_POSITION;
+      m_targetAngle = DEFAULT_POSITION;
     });
   }
 

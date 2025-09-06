@@ -52,7 +52,6 @@ public class RobotContainer {
                 m_buttonController.y().whileTrue(SuperstructureFactory.ScoreCoral());
                 m_buttonController.a().whileTrue(IntakeFactory.runIntake());
                 m_buttonController.b().whileTrue(ArmFactory.IntakePosition());
-
         }
 
         public Command getAutonomousCommand() {

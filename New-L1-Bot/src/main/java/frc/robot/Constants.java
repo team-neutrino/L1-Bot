@@ -23,22 +23,23 @@ public final class Constants {
         public static final double INTAKE_kD = 0.0;
         public static final int PROXIMITY_SENSOR = 4;
         public static final double PROXIMITY = 0.055;
-        public static final double INTAKE_VOLTAGE = 0.5;
-        public static final double OUTTAKE_VOLTAGE = -0.5;
+        public static final double INTAKE_VOLTAGE = 0.8;
+        public static final double OUTTAKE_VOLTAGE = -0.3;
     }
 
     public static class ArmConstants {
         public static final int ARM_MOTOR_ID = 3;
         public static final int ARM_CURRENT_LIMIT = 40;
-        public static final double ARM_kP = 0.0;
+        public static final double ARM_kP = 0.5;
         public static final double ARM_kI = 0.0;
         public static final double ARM_kD = 0.0;
-        public static final double INTAKE_POSITION = 20.0;
-        public static final double SCORE_POSITION = 240.0;
-        public static final double FFCONSTANT = 0.05;
+        public static final double INTAKE_POSITION = 241;
+        public static final double SCORE_POSITION = 16.0;
+        public static final double FFCONSTANT = 0.25;
         public static final double ALLOWED_ERROR = 0.5;
         public static final double GAIN_THRESHOLD = 6.0;
-        public static final double START_POSITION = 270.0;
+        public static final double START_POSITION = -7.0;
+        public static final double DEFAULT_POSITION = 16.0;
         public static final double TOLERANCE = 2.0;
     }
 

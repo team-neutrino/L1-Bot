@@ -13,12 +13,12 @@ public class SuperstructureFactory {
     public static Command IntakeCoral() {
         Command armCom = ArmFactory.IntakePosition();
         Command intakeCom = IntakeFactory.runIntake();
-        return armCom.alongWith(intakeCom).until(() -> intake.hasCoral()); 
+        return armCom.alongWith(intakeCom).until(() -> intake.hasCoral());
     }
 
     public static Command ScoreCoral() {
         Command armCom = ArmFactory.ScorePosition();
-        Command intakeCom = IntakeFactory.runOuttake();
-        return armCom.alongWith(intakeCom).until(() -> !(intake.debouncedHasCoral()));
+        Command outtakeCom = IntakeFactory.runOuttake();
+        return armCom.andThen(outtakeCom).until(() -> !(intake.debouncedHasCoral()));
     }
 }
