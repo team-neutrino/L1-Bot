@@ -39,8 +39,8 @@ public class Arm extends SubsystemBase {
 
     m_motor.setNeutralMode(NeutralModeValue.Coast);
     m_motorConfig.Feedback.SensorToMechanismRatio = 0.57;
-    //8/4.22 = 1.8957
-    //4.22/8 = 0.5275
+    // 8/4.22 = 1.8957
+    // 4.22/8 = 0.5275
     m_motor.getConfigurator().apply(m_motorConfig);
     m_motor.setPosition(START_POSITION);
   }
@@ -114,8 +114,6 @@ public class Arm extends SubsystemBase {
   public void periodic() {
     m_motor.setVoltage(m_motorVoltage);
     setFeedForward();
-    System.out.println("Arm angle: " + getAngle());
-    System.out.println("Feedforward: " + feedForwardCalculation());
   }
 
   /**
