@@ -71,3 +71,12 @@
 ## DIO
 | Subsystem | Description | Port |
 | --------- | ----------- | ---- |
+
+## Button Controller
+| Button     | Function         |
+| ---------- | -----------------|
+| Y          | Score Coral      |
+| X          | Intake Coral     |
+| B          | Position Testing |
+| A          | Intake Testing   |
+
