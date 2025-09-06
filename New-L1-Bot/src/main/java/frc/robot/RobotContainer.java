@@ -52,12 +52,6 @@ public class RobotContainer {
                 m_buttonController.y().whileTrue(SuperstructureFactory.ScoreCoral());
                 m_buttonController.a().whileTrue(IntakeFactory.runIntake());
                 m_buttonController.b().whileTrue(ArmFactory.IntakePosition());
-
-                // Run SysId routines when holding back/start and X/Y.
-                // Note that each routine should be run exactly once in a single log.
-
-                // reset the field-centric heading on left bumper press
-                m_driverController.leftBumper().onTrue(swerve.runOnce(() -> swerve.seedFieldCentric()));
         }
 
         public Command getAutonomousCommand() {
