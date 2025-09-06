@@ -124,7 +124,7 @@ public class Arm extends SubsystemBase {
    */
   public Command armDefaultCommand() {
     return run(() -> {
-      m_targetAngle = START_POSITION;
+      m_targetAngle = DEFAULT_POSITION;
     });
   }
 
