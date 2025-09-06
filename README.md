@@ -71,3 +71,6 @@
 ## DIO
 | Subsystem | Description | Port |
 | --------- | ----------- | ---- |
+
+## Button Map 
+<img width="1379" height="722" alt="Screenshot (21)" src="https://github.com/user-attachments/assets/eb1ddd2f-3e9f-4c38-ae68-09779e8e8030" />
