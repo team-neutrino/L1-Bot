@@ -24,6 +24,7 @@ public class DriveToPoint extends Command {
   private DriveToPointPID m_pointControl;
   private List<Pose2d> m_localList;
   private boolean m_bumperWasPressed;
+  private boolean m_hadGamePiece;
 
   public DriveToPoint(CommandXboxController driverController) {
     m_swerve = Subsystem.swerve;
@@ -36,15 +37,26 @@ public class DriveToPoint extends Command {
   public void initialize() {
     m_swerve.setDrivingToPoint(true);
     m_swerve.setAtPoint(false);
+    m_hadGamePiece = Subsystem.intake.debouncedHasCoral();
+    setTarget();
+    setLocalList();
   }
 
   @Override
   public void execute() {
+    checkBumpers();
     drive();
+    if ((m_swerve.isAtPoint() && (Subsystem.intake.debouncedHasCoral() != m_hadGamePiece))
+        || (Subsystem.arm.isAtIntake())) {
+      initialize(); // reinitialize if the state of our game piece changes or if we want to intake
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
+    m_swerve.setDrivingToPoint(false);
+    m_swerve.setAtPoint(false);
+    m_pointControl.setTarget(null);
   }
 
   @Override
@@ -69,16 +81,24 @@ public class DriveToPoint extends Command {
   }
 
   private void setTarget() {
-    m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
+    if (Subsystem.intake.debouncedHasCoral()) {
+      m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
+      return;
+    }
+    // insert setting target to drive to Coral
   }
 
+  /*
+   * Checks whether the driver has pressed Xbox controller buttons to move to the
+   * next tag. Rising edge - only one tag change per button press.
+   */
   private void checkBumpers() {
     boolean isLeftPressed = m_driverController.getHID().getLeftBumperButton();
     boolean isRightPressed = m_driverController.getHID().getRightBumperButton();
     if (m_bumperWasPressed && (!isLeftPressed && !isRightPressed)) {
       m_bumperWasPressed = false;
     }
-    if (!m_bumperWasPressed) {
+    if (m_bumperWasPressed) {
       return;
     }
     m_bumperWasPressed = isLeftPressed || isRightPressed;
