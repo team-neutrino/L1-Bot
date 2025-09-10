@@ -75,6 +75,8 @@ public final class Constants {
         public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout
                 .loadField(AprilTagFields.k2025ReefscapeAndyMark);
 
+        public static final double AT_POINT_TOLERANCE = 0.04;
+
         public static final double PARALLEL_OFFSET = 0;
         public static final double PERPENDICULAR_OFFSET = 0;
         public static final double REEF_WIDTH = 0.33;

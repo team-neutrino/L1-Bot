@@ -37,6 +37,10 @@ public class DriveToPoint extends Command {
   public void initialize() {
     m_swerve.setDrivingToPoint(true);
     m_swerve.setAtPoint(false);
+    if (!Constants.GlobalConstants.RED_ALLIANCE.isPresent()) {
+      System.out.println("NO ALLIANCE VALUE YET");
+      return;
+    }
     m_hadGamePiece = Subsystem.intake.debouncedHasCoral();
     setTarget();
     setLocalList();
@@ -44,8 +48,11 @@ public class DriveToPoint extends Command {
 
   @Override
   public void execute() {
-    checkBumpers();
+    if (Subsystem.intake.debouncedHasCoral()) {
+      checkBumpers();
+    }
     drive();
+    updateAtPoint();
     if ((m_swerve.isAtPoint() && (Subsystem.intake.debouncedHasCoral() != m_hadGamePiece))
         || (Subsystem.arm.isAtIntake())) {
       initialize(); // reinitialize if the state of our game piece changes or if we want to intake
@@ -122,6 +129,16 @@ public class DriveToPoint extends Command {
     if (BLUE_REEF.contains(target)) {
       m_localList = BLUE_REEF;
       return;
+    }
+  }
+
+  public void updateAtPoint() {
+    if (Subsystem.limelight.getTv() && Math.abs(m_pointControl.getStraightLineDist()) < AT_POINT_TOLERANCE) {
+      m_swerve.setDrivingToPoint(false);
+      m_swerve.setAtPoint(true);
+    } else {
+      m_swerve.setDrivingToPoint(true);
+      m_swerve.setAtPoint(false);
     }
   }
 
