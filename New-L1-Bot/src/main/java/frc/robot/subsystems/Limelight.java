@@ -50,7 +50,7 @@ public class Limelight extends SubsystemBase {
     }
   }
 
-  private boolean getTv() {
+  public boolean getTv() {
     return m_has_tag;
   }
 
