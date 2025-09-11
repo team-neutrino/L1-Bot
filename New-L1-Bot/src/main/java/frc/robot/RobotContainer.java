@@ -13,6 +13,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.command_factories.ArmFactory;
 import frc.robot.command_factories.IntakeFactory;
 import frc.robot.command_factories.SuperstructureFactory;
+import frc.robot.commands.DriveToPoint;
 import frc.robot.util.Subsystem;
 
 import static frc.robot.util.Subsystem.*;
@@ -34,12 +35,11 @@ public class RobotContainer {
         private void configureDefaultCommands() {
                 intake.setDefaultCommand(intake.intakeDefaultCommand());
                 arm.setDefaultCommand(arm.armDefaultCommand());
+                swerve.setDefaultCommand(
+                                swerve.defaultCommand(m_driverController));
         }
 
         private void configureBindings() {
-                swerve.setDefaultCommand(
-                                swerve.defaultCommand(m_driverController));
-
                 // Idle while the robot is disabled. This ensures the configured
                 // neutral mode is applied to the drive motors while disabled.
                 final var idle = new SwerveRequest.Idle();
@@ -47,6 +47,7 @@ public class RobotContainer {
                                 swerve.applyRequest(() -> idle).ignoringDisable(true));
 
                 m_driverController.back().whileTrue(swerve.resetYawCommand());
+                m_driverController.b().whileTrue(new DriveToPoint(m_driverController));
 
                 m_buttonController.x().whileTrue(SuperstructureFactory.IntakeCoral());
                 m_buttonController.y().toggleOnTrue(ArmFactory.ScorePositionBack());
