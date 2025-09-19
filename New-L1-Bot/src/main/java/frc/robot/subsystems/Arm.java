@@ -67,10 +67,6 @@ public class Arm extends SubsystemBase {
     return Math.abs(getAngle() - m_targetAngle) <= ALLOWED_ERROR;
   }
 
-  private boolean nearTargetAngle() {
-    return Math.abs(getAngle() - m_targetAngle) <= GAIN_THRESHOLD;
-  }
-
   public boolean readyToScore() {
     return atTargetAngle() && !(m_targetAngle == INTAKE_POSITION);
   }
