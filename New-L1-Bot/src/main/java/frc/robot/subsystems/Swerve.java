@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.Telemetry;
 import frc.robot.util.generated.CommandSwerveDrivetrain;
 import frc.robot.util.generated.TunerConstants;
 
@@ -22,11 +23,13 @@ import static frc.robot.Constants.SwerveConstants.*;
 public class Swerve extends CommandSwerveDrivetrain {
   private boolean m_isDrivingToPoint = false;
   private boolean m_isAtPoint = false;
+  private Telemetry m_telemetry = new Telemetry(MAX_SPEED);
 
   public Swerve() {
     super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
         TunerConstants.BackLeft, TunerConstants.BackRight);
     resetRotation(Rotation2d.fromDegrees(getYawDegrees()));
+    registerTelemetry(m_telemetry::telemeterize);
   }
 
   public double getYaw360() {
