@@ -30,7 +30,7 @@ public final class Constants {
     public static class ArmConstants {
         public static final int ARM_MOTOR_ID = 3;
         public static final int ARM_CURRENT_LIMIT = 40;
-        public static final double FEEDFORWARD = 0.228;
+        public static final double SENSOR_TO_MECHANISM_RATIO = 0.228;
         public static final double ARM_kP = 0.27;
         public static final double ARM_kI = 0.0;
         public static final double ARM_kD = 0.0;

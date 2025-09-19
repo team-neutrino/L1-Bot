@@ -38,7 +38,7 @@ public class Arm extends SubsystemBase {
     m_motorConfig.Slot0.kD = ARM_kD;
 
     m_motor.setNeutralMode(NeutralModeValue.Coast);
-    m_motorConfig.Feedback.SensorToMechanismRatio = FEEDFORWARD;
+    m_motorConfig.Feedback.SensorToMechanismRatio = SENSOR_TO_MECHANISM_RATIO;
     m_motor.getConfigurator().apply(m_motorConfig);
     m_motor.setPosition(START_POSITION);
   }
