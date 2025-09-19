@@ -5,6 +5,7 @@
 package frc.robot.util;
 
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ArmNT;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Swerve;
@@ -12,7 +13,8 @@ import frc.robot.subsystems.Swerve;
 /** Add your docs here. */
 public class Subsystem {
     public static final Intake intake = new Intake();
-    public static final Arm arm = new Arm();
+    public static final Arm arm = new ArmNT();
     public static final Swerve swerve = new Swerve();
     public static final Limelight limelight = new Limelight();
+    
 }
