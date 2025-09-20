@@ -49,8 +49,8 @@ public class RobotContainer {
                 m_driverController.back().whileTrue(swerve.resetYawCommand());
 
                 m_buttonController.x().whileTrue(SuperstructureFactory.IntakeCoral());
-                m_buttonController.y().whileTrue(SuperstructureFactory.ScoreCoralFront());
-                m_buttonController.a().whileTrue(SuperstructureFactory.ScoreCoralBack());
+                m_buttonController.y().toggleOnTrue(ArmFactory.ScorePositionBack());
+                m_buttonController.rightBumper().whileTrue(IntakeFactory.runOuttake());
         }
 
         public Command getAutonomousCommand() {
