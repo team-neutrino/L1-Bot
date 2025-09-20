@@ -51,6 +51,7 @@ public class RobotContainer {
                 m_buttonController.x().whileTrue(SuperstructureFactory.IntakeCoral());
                 m_buttonController.y().toggleOnTrue(ArmFactory.ScorePositionBack());
                 m_buttonController.rightBumper().whileTrue(IntakeFactory.runOuttake());
+                m_buttonController.leftBumper().whileTrue(IntakeFactory.runSoftOuttake());
         }
 
         public Command getAutonomousCommand() {

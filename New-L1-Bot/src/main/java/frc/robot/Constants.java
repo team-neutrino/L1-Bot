@@ -25,6 +25,7 @@ public final class Constants {
         public static final double PROXIMITY = 0.055;
         public static final double INTAKE_VOLTAGE = 1.0;
         public static final double OUTTAKE_VOLTAGE = -0.3;
+        public static final double SOFT_OUTTAKE_VOLTAGE = -0.2;
     }
 
     public static class ArmConstants {

@@ -19,4 +19,8 @@ public class IntakeFactory {
     public static Command runOuttake() {
         return intake.runIntake(OUTTAKE_VOLTAGE);
     }
+
+    public static Command runSoftOuttake() {
+        return intake.runIntake(SOFT_OUTTAKE_VOLTAGE);
+    }
 }
