@@ -15,10 +15,4 @@ public class SuperstructureFactory {
         Command intakeCom = IntakeFactory.runIntake();
         return armCom.alongWith(intakeCom).until(() -> intake.hasCoral());
     }
-
-    public static Command ScoreCoral() {
-        Command armCom = ArmFactory.ScorePosition();
-        Command outtakeCom = IntakeFactory.runOuttake();
-        return armCom.andThen(outtakeCom).until(() -> !(intake.debouncedHasCoral()));
-    }
 }
