@@ -16,8 +16,7 @@ public class ArmFactory {
         return arm.armRotateCommand(INTAKE_POSITION);
     }
 
-    public static Command ScorePosition() {
-        return arm.armRotateCommand(SCORE_POSITION).until(() -> arm.readyToScore());
+    public static Command ScorePositionBack() {
+        return arm.armRotateCommand(BACK_SCORE_POSITION);
     }
-
 }

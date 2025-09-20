@@ -25,6 +25,7 @@ public final class Constants {
         public static final double PROXIMITY = 0.055;
         public static final double INTAKE_VOLTAGE = 1.0;
         public static final double OUTTAKE_VOLTAGE = -0.3;
+        public static final double SOFT_OUTTAKE_VOLTAGE = -0.2;
     }
 
     public static class ArmConstants {
@@ -34,8 +35,9 @@ public final class Constants {
         public static final double ARM_kP = 0.27;
         public static final double ARM_kI = 0.0;
         public static final double ARM_kD = 0.0;
-        public static final double INTAKE_POSITION = 240;
-        public static final double SCORE_POSITION = 16.0;
+        public static final double INTAKE_POSITION = 239;
+        public static final double FRONT_SCORE_POSITION = 16.0;
+        public static final double BACK_SCORE_POSITION = 170.0;
         public static final double FFCONSTANT = 0.25;
         public static final double ALLOWED_ERROR = 0.5;
         public static final double GAIN_THRESHOLD = 6.0;
