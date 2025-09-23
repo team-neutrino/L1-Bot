@@ -13,8 +13,8 @@ import java.util.List;
 
 public class DriveToPointPID {
 
-    private PIDController m_controlskerX = new PIDController(DRIVE_TO_POINT_P, 0, DRIVE_TO_POINT_D);
-    private PIDController m_controlskerY = new PIDController(DRIVE_TO_POINT_P, 0, DRIVE_TO_POINT_D);
+    private PIDController m_xControl = new PIDController(DRIVE_TO_POINT_P, DRIVE_TO_POINT_I, DRIVE_TO_POINT_D);
+    private PIDController m_yControl = new PIDController(DRIVE_TO_POINT_P, DRIVE_TO_POINT_I, DRIVE_TO_POINT_D);
     private static Pose2d m_target = new Pose2d(0, 0, new Rotation2d());
     NetworkTableInstance nt = NetworkTableInstance.getDefault();
     private final NetworkTable driveStateTable = nt.getTable("DriveToPoint");
@@ -33,7 +33,7 @@ public class DriveToPointPID {
         if (Subsystem.swerve.isAtPoint()) {
             return 0;
         }
-        return m_controlskerX.calculate(Subsystem.swerve.getCurrentPose().getX() - m_target.getX());
+        return m_xControl.calculate(Subsystem.swerve.getCurrentPose().getX() - m_target.getX());
     }
 
     /**
@@ -56,7 +56,7 @@ public class DriveToPointPID {
         if (Subsystem.swerve.isAtPoint()) {
             return 0;
         }
-        return m_controlskerY.calculate(Subsystem.swerve.getCurrentPose().getY() - m_target.getY());
+        return m_yControl.calculate(Subsystem.swerve.getCurrentPose().getY() - m_target.getY());
     }
 
     public double getXDistance() {

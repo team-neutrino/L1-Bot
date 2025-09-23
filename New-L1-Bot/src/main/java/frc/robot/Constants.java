@@ -78,9 +78,9 @@ public final class Constants {
         public static final double AT_POINT_TOLERANCE = 0.04;
 
         public static final double PARALLEL_OFFSET = 0;
-        public static final double PERPENDICULAR_OFFSET = 0;
+        public static final double PERPENDICULAR_OFFSET = 0.2;
         public static final double REEF_WIDTH = 0.33;
-        public static final double DRIVE_TO_POINT_P = 0;
+        public static final double DRIVE_TO_POINT_P = 4.0;
         public static final double DRIVE_TO_POINT_I = 0;
         public static final double DRIVE_TO_POINT_D = 0;
         public static final double MAX_DRIVETOPOINT_SPEED = 5;

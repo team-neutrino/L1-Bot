@@ -18,6 +18,9 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.MathUtil;
 
+import static frc.robot.Constants.DriveToPointConstants.DRIVE_TO_POINT_D;
+import static frc.robot.Constants.DriveToPointConstants.DRIVE_TO_POINT_I;
+import static frc.robot.Constants.DriveToPointConstants.DRIVE_TO_POINT_P;
 import static frc.robot.Constants.SwerveConstants.*;
 
 public class Swerve extends CommandSwerveDrivetrain {
@@ -29,6 +32,7 @@ public class Swerve extends CommandSwerveDrivetrain {
     super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
         TunerConstants.BackLeft, TunerConstants.BackRight);
     resetRotation(Rotation2d.fromDegrees(getYawDegrees()));
+    configureRequestPID();
     registerTelemetry(m_telemetry::telemeterize);
   }
 
@@ -85,6 +89,10 @@ public class Swerve extends CommandSwerveDrivetrain {
         .withVelocityY(yVelocity)
         .withTargetDirection(targetDirection);
     setControl(SwerveRequestStash.driveWithVelocity);
+  }
+
+  public void configureRequestPID() {
+    SwerveRequestStash.driveWithVelocity.HeadingController.setPID(DRIVE_TO_POINT_P, DRIVE_TO_POINT_I, DRIVE_TO_POINT_D);
   }
 
   public class SwerveRequestStash {
