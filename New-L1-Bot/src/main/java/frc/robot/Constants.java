@@ -63,12 +63,12 @@ public final class Constants {
 
     public static class LimelightConstants {
         public static final String REEF_CAMERA = "limelight-lemon";
-        public static final double CAMERA_FORWARD_OFFSET = 0;
-        public static final double CAMERA_HEIGHT_OFFSET = 0;
-        public static final double CAMERA_PITCH_OFFSET = 0;
+        public static final double CAMERA_FORWARD_OFFSET = 0.236;
+        public static final double CAMERA_HEIGHT_OFFSET = 0.316;
+        public static final double CAMERA_SIDE_OFFSET = -0.143;
+        public static final double CAMERA_PITCH_OFFSET = 11.1;
         public static final double CAMERA_ROLL_OFFSET = 0;
-        public static final double CAMERA_SIDE_OFFSET = 0;
-        public static final double CAMERA_YAW_OFFSET = 0;
+        public static final double CAMERA_YAW_OFFSET = -14.3;
     }
 
     public static class DriveToPointConstants {
@@ -78,7 +78,7 @@ public final class Constants {
         public static final double AT_POINT_TOLERANCE = 0.04;
 
         public static final double PARALLEL_OFFSET = 0;
-        public static final double PERPENDICULAR_OFFSET = 0.2;
+        public static final double PERPENDICULAR_OFFSET = 0.3;
         public static final double REEF_WIDTH = 0.33;
         public static final double DRIVE_TO_POINT_P = 4.0;
         public static final double DRIVE_TO_POINT_I = 0;

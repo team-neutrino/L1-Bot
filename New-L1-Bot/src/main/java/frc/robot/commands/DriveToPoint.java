@@ -44,6 +44,7 @@ public class DriveToPoint extends Command {
     m_hadGamePiece = Subsystem.intake.debouncedHasCoral();
     setTarget();
     setLocalList();
+    System.out.println("init");
   }
 
   @Override
@@ -88,11 +89,9 @@ public class DriveToPoint extends Command {
   }
 
   private void setTarget() {
-    if (Subsystem.intake.debouncedHasCoral()) {
-      m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
-      return;
-    }
+    m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
     // insert setting target to drive to Coral
+    // fix canandcolor stuff
   }
 
   /*
@@ -111,7 +110,7 @@ public class DriveToPoint extends Command {
     m_bumperWasPressed = isLeftPressed || isRightPressed;
 
     int id = m_localList.indexOf(m_pointControl.getTarget());
-    id += isLeftPressed ? -1 : isRightPressed ? 1 : 0;
+    id += isRightPressed ? -1 : isLeftPressed ? 1 : 0;
     id = id >= m_localList.size() ? 0 : id < 0 ? m_localList.size() - 1 : id;
 
     m_pointControl.setTarget(m_localList.get(id));
@@ -122,6 +121,7 @@ public class DriveToPoint extends Command {
    */
   private void setLocalList() {
     Pose2d target = m_pointControl.getTarget();
+    System.out.println(target);
     if (RED_REEF.contains(target)) {
       m_localList = RED_REEF;
       return;

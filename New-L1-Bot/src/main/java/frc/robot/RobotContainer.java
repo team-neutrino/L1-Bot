@@ -5,10 +5,13 @@
 package frc.robot;
 
 import com.ctre.phoenix6.swerve.SwerveRequest;
+
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
+import frc.robot.Constants.DriveToPointConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.command_factories.ArmFactory;
 import frc.robot.command_factories.IntakeFactory;
@@ -27,6 +30,7 @@ public class RobotContainer {
                         OperatorConstants.kButtonsControllerPort);
 
         public RobotContainer() {
+                AprilTagFieldLayout tmp = DriveToPointConstants.FIELD_LAYOUT;
                 subsystemContainer = new Subsystem();
                 configureDefaultCommands();
                 configureBindings();
