@@ -129,7 +129,7 @@ public class DriveToPoint extends Command {
   }
 
   public void updateAtPoint() {
-    if (Subsystem.limelight.getTv() && Math.abs(m_pointControl.getStraightLineDist()) < AT_POINT_TOLERANCE) {
+    if ((Subsystem.limelight.getFrontTv() || Subsystem.limelight.getBackTv())&& Math.abs(m_pointControl.getStraightLineDist()) < AT_POINT_TOLERANCE) {
       m_swerve.setDrivingToPoint(false);
       m_swerve.setAtPoint(true);
     } else {
