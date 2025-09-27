@@ -49,9 +49,7 @@ public class DriveToPoint extends Command {
 
   @Override
   public void execute() {
-    if (Subsystem.intake.debouncedHasCoral()) {
-      checkBumpers();
-    }
+    checkBumpers();
     drive();
     updateAtPoint();
     if ((m_swerve.isAtPoint() && (Subsystem.intake.debouncedHasCoral() != m_hadGamePiece))

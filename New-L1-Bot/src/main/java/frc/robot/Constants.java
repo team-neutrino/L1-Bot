@@ -34,7 +34,7 @@ public final class Constants {
         public static final int PROXIMITY_SENSOR = 4;
         public static final double PROXIMITY = 0.055;
         public static final double INTAKE_VOLTAGE = 1.0;
-        public static final double OUTTAKE_VOLTAGE = -0.3;
+        public static final double OUTTAKE_VOLTAGE = -0.33;
         public static final double SOFT_OUTTAKE_VOLTAGE = -0.2;
     }
 
@@ -77,12 +77,12 @@ public final class Constants {
 
         public static final double AT_POINT_TOLERANCE = 0.04;
 
-        public static final double PARALLEL_OFFSET = 0;
-        public static final double PERPENDICULAR_OFFSET = 0.3;
+        public static final double PARALLEL_OFFSET = 0.13;
+        public static final double PERPENDICULAR_OFFSET = 0.72;
         public static final double REEF_WIDTH = 0.33;
         public static final double DRIVE_TO_POINT_P = 4.0;
-        public static final double DRIVE_TO_POINT_I = 0;
-        public static final double DRIVE_TO_POINT_D = 0;
+        public static final double DRIVE_TO_POINT_I = 0.0;
+        public static final double DRIVE_TO_POINT_D = 0.0;
         public static final double MAX_DRIVETOPOINT_SPEED = 5;
 
         public static final Pose2d RED_REEF_6A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(6).get(), true);
