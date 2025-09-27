@@ -34,7 +34,7 @@ public final class Constants {
         public static final int PROXIMITY_SENSOR = 4;
         public static final double PROXIMITY = 0.055;
         public static final double INTAKE_VOLTAGE = 1.0;
-        public static final double OUTTAKE_VOLTAGE = -0.33;
+        public static final double OUTTAKE_VOLTAGE = -0.45;
         public static final double SOFT_OUTTAKE_VOLTAGE = -0.2;
     }
 
