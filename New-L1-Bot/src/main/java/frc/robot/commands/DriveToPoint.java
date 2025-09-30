@@ -88,8 +88,6 @@ public class DriveToPoint extends Command {
 
   private void setTarget() {
     m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
-    // insert setting target to drive to Coral
-    // fix canandcolor stuff
   }
 
   /*
