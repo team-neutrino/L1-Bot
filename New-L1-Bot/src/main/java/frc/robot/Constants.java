@@ -64,18 +64,18 @@ public final class Constants {
     public static class LimelightConstants {
         public static final String FRONT_REEF_CAMERA = "limelight-lemon";
         public static final String BACK_REEF_CAMERA = "limelight-vienna";
-        public static final double FRONT_CAMERA_FORWARD_OFFSET = 0.236;
-        public static final double FRONT_CAMERA_HEIGHT_OFFSET = 0.316;
-        public static final double FRONT_CAMERA_SIDE_OFFSET = -0.143;
+        public static final double FRONT_CAMERA_FORWARD_OFFSET = -0.1385;
+        public static final double FRONT_CAMERA_HEIGHT_OFFSET = 0.324;
+        public static final double FRONT_CAMERA_SIDE_OFFSET = -0.1955;
         public static final double FRONT_CAMERA_PITCH_OFFSET = 11.1;
         public static final double FRONT_CAMERA_ROLL_OFFSET = 0;
         public static final double FRONT_CAMERA_YAW_OFFSET = -14.3;
-        public static final double BACK_CAMERA_FORWARD_OFFSET = 0.229;
+        public static final double BACK_CAMERA_FORWARD_OFFSET = -0.229;
         public static final double BACK_CAMERA_HEIGHT_OFFSET = 0.222;
         public static final double BACK_CAMERA_SIDE_OFFSET = 0;
-        public static final double BACK_CAMERA_PITCH_OFFSET = 0.13;
+        public static final double BACK_CAMERA_PITCH_OFFSET = 5;
         public static final double BACK_CAMERA_ROLL_OFFSET = 0;
-        public static final double BACK_CAMERA_YAW_OFFSET = 0;
+        public static final double BACK_CAMERA_YAW_OFFSET = 180;
     }
 
     public static class DriveToPointConstants {
@@ -85,56 +85,133 @@ public final class Constants {
         public static final double AT_POINT_TOLERANCE = 0.04;
 
         public static final double PARALLEL_OFFSET = 0.13;
-        public static final double PERPENDICULAR_OFFSET = 0.73;
+        public static final double FRONT_PERPENDICULAR_OFFSET = 0.3;
+        public static final double BACK_PERPENDICULAR_OFFSET = 0.8;
         public static final double REEF_WIDTH = 0.33;
         public static final double DRIVE_TO_POINT_P = 4.0;
         public static final double DRIVE_TO_POINT_I = 0.0;
         public static final double DRIVE_TO_POINT_D = 0.0;
         public static final double MAX_DRIVETOPOINT_SPEED = 5;
 
-        public static final Pose2d RED_REEF_6A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(6).get(), true);
-        public static final Pose2d RED_REEF_6B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(6).get(), false);
-        public static final Pose2d RED_REEF_7A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(7).get(), true);
-        public static final Pose2d RED_REEF_7B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(7).get(), false);
-        public static final Pose2d RED_REEF_8A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(8).get(), true);
-        public static final Pose2d RED_REEF_8B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(8).get(), false);
-        public static final Pose2d RED_REEF_9A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(9).get(), true);
-        public static final Pose2d RED_REEF_9B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(9).get(), false);
-        public static final Pose2d RED_REEF_10A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(10).get(), true);
-        public static final Pose2d RED_REEF_10B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(10).get(), false);
-        public static final Pose2d RED_REEF_11A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(11).get(), true);
-        public static final Pose2d RED_REEF_11B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(11).get(), false);
+        public static final Pose2d FRONT_RED_REEF_6A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(6).get(),
+                true);
+        public static final Pose2d FRONT_RED_REEF_6B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(6).get(),
+                false);
+        public static final Pose2d FRONT_RED_REEF_7A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(7).get(),
+                true);
+        public static final Pose2d FRONT_RED_REEF_7B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(7).get(),
+                false);
+        public static final Pose2d FRONT_RED_REEF_8A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(8).get(),
+                true);
+        public static final Pose2d FRONT_RED_REEF_8B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(8).get(),
+                false);
+        public static final Pose2d FRONT_RED_REEF_9A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(9).get(),
+                true);
+        public static final Pose2d FRONT_RED_REEF_9B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(9).get(),
+                false);
+        public static final Pose2d FRONT_RED_REEF_10A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(10).get(),
+                true);
+        public static final Pose2d FRONT_RED_REEF_10B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(10).get(),
+                false);
+        public static final Pose2d FRONT_RED_REEF_11A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(11).get(),
+                true);
+        public static final Pose2d FRONT_RED_REEF_11B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(11).get(),
+                false);
 
-        public static final Pose2d BLUE_REEF_17A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(17).get(),
+        public static final Pose2d FRONT_BLUE_REEF_17A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(17).get(),
                 false);
-        public static final Pose2d BLUE_REEF_17B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(17).get(), true);
-        public static final Pose2d BLUE_REEF_18A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(18).get(),
+        public static final Pose2d FRONT_BLUE_REEF_17B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(17).get(),
+                true);
+        public static final Pose2d FRONT_BLUE_REEF_18A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(18).get(),
                 false);
-        public static final Pose2d BLUE_REEF_18B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(18).get(), true);
-        public static final Pose2d BLUE_REEF_19A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(19).get(),
+        public static final Pose2d FRONT_BLUE_REEF_18B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(18).get(),
+                true);
+        public static final Pose2d FRONT_BLUE_REEF_19A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(19).get(),
                 false);
-        public static final Pose2d BLUE_REEF_19B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(19).get(), true);
-        public static final Pose2d BLUE_REEF_20A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(20).get(),
+        public static final Pose2d FRONT_BLUE_REEF_19B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(19).get(),
+                true);
+        public static final Pose2d FRONT_BLUE_REEF_20A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(20).get(),
                 false);
-        public static final Pose2d BLUE_REEF_20B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(20).get(), true);
-        public static final Pose2d BLUE_REEF_21A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(21).get(),
+        public static final Pose2d FRONT_BLUE_REEF_20B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(20).get(),
+                true);
+        public static final Pose2d FRONT_BLUE_REEF_21A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(21).get(),
                 false);
-        public static final Pose2d BLUE_REEF_21B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(21).get(), true);
-        public static final Pose2d BLUE_REEF_22A = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(22).get(),
+        public static final Pose2d FRONT_BLUE_REEF_21B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(21).get(),
+                true);
+        public static final Pose2d FRONT_BLUE_REEF_22A = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(22).get(),
                 false);
-        public static final Pose2d BLUE_REEF_22B = DriveToPoint.calculatePoint(FIELD_LAYOUT.getTagPose(22).get(), true);
+        public static final Pose2d FRONT_BLUE_REEF_22B = DriveToPoint.frontCalculatePoint(FIELD_LAYOUT.getTagPose(22).get(),
+                true);
 
-        public static final List<Pose2d> TARGET_POSES = List.of(
-                RED_REEF_6A, RED_REEF_6B, RED_REEF_7A, RED_REEF_7B, RED_REEF_8A, RED_REEF_8B, RED_REEF_9A, RED_REEF_9B,
-                RED_REEF_10A, RED_REEF_10B, RED_REEF_11A, RED_REEF_11B, BLUE_REEF_17A, BLUE_REEF_17B,
-                BLUE_REEF_18A, BLUE_REEF_18B, BLUE_REEF_19A, BLUE_REEF_19B, BLUE_REEF_20A,
-                BLUE_REEF_20B, BLUE_REEF_21A, BLUE_REEF_21B, BLUE_REEF_22A, BLUE_REEF_22B);
-        public static final List<Pose2d> RED_REEF = List.of(RED_REEF_6A, RED_REEF_6B, RED_REEF_7A, RED_REEF_7B,
-                RED_REEF_8A, RED_REEF_8B, RED_REEF_9A, RED_REEF_9B,
-                RED_REEF_10A, RED_REEF_10B, RED_REEF_11A, RED_REEF_11B);
-        public static final List<Pose2d> BLUE_REEF = List.of(BLUE_REEF_17A, BLUE_REEF_17B,
-                BLUE_REEF_18A, BLUE_REEF_18B, BLUE_REEF_19A, BLUE_REEF_19B, BLUE_REEF_20A,
-                BLUE_REEF_20B, BLUE_REEF_21A, BLUE_REEF_21B, BLUE_REEF_22A, BLUE_REEF_22B);
+        public static final Pose2d BACK_RED_REEF_6A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(6).get(),
+                true);
+        public static final Pose2d BACK_RED_REEF_6B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(6).get(),
+                false);
+        public static final Pose2d BACK_RED_REEF_7A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(7).get(),
+                true);
+        public static final Pose2d BACK_RED_REEF_7B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(7).get(),
+                false);
+        public static final Pose2d BACK_RED_REEF_8A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(8).get(),
+                true);
+        public static final Pose2d BACK_RED_REEF_8B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(8).get(),
+                false);
+        public static final Pose2d BACK_RED_REEF_9A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(9).get(),
+                true);
+        public static final Pose2d BACK_RED_REEF_9B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(9).get(),
+                false);
+        public static final Pose2d BACK_RED_REEF_10A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(10).get(),
+                true);
+        public static final Pose2d BACK_RED_REEF_10B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(10).get(),
+                false);
+        public static final Pose2d BACK_RED_REEF_11A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(11).get(),
+                true);
+        public static final Pose2d BACK_RED_REEF_11B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(11).get(),
+                false);
+
+        public static final Pose2d BACK_BLUE_REEF_17A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(17).get(),
+                false);
+        public static final Pose2d BACK_BLUE_REEF_17B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(17).get(),
+                true);
+        public static final Pose2d BACK_BLUE_REEF_18A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(18).get(),
+                false);
+        public static final Pose2d BACK_BLUE_REEF_18B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(18).get(),
+                true);
+        public static final Pose2d BACK_BLUE_REEF_19A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(19).get(),
+                false);
+        public static final Pose2d BACK_BLUE_REEF_19B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(19).get(),
+                true);
+        public static final Pose2d BACK_BLUE_REEF_20A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(20).get(),
+                false);
+        public static final Pose2d BACK_BLUE_REEF_20B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(20).get(),
+                true);
+        public static final Pose2d BACK_BLUE_REEF_21A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(21).get(),
+                false);
+        public static final Pose2d BACK_BLUE_REEF_21B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(21).get(),
+                true);
+        public static final Pose2d BACK_BLUE_REEF_22A = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(22).get(),
+                false);
+        public static final Pose2d BACK_BLUE_REEF_22B = DriveToPoint.backCalculatePoint(FIELD_LAYOUT.getTagPose(22).get(),
+                true);
+
+        public static final List<Pose2d> FRONT_RED_REEF = List.of(FRONT_RED_REEF_6A, FRONT_RED_REEF_6B,
+                FRONT_RED_REEF_7A, FRONT_RED_REEF_7B,
+                FRONT_RED_REEF_8A, FRONT_RED_REEF_8B, FRONT_RED_REEF_9A, FRONT_RED_REEF_9B,
+                FRONT_RED_REEF_10A, FRONT_RED_REEF_10B, FRONT_RED_REEF_11A, FRONT_RED_REEF_11B);
+
+        public static final List<Pose2d> BACK_RED_REEF = List.of(BACK_RED_REEF_6A, BACK_RED_REEF_6B, BACK_RED_REEF_7A,
+                BACK_RED_REEF_7B,
+                BACK_RED_REEF_8A, BACK_RED_REEF_8B, BACK_RED_REEF_9A, BACK_RED_REEF_9B,
+                BACK_RED_REEF_10A, BACK_RED_REEF_10B, BACK_RED_REEF_11A, BACK_RED_REEF_11B);
+
+        public static final List<Pose2d> FRONT_BLUE_REEF = List.of(FRONT_BLUE_REEF_17A, FRONT_BLUE_REEF_17B,
+                FRONT_BLUE_REEF_18A, FRONT_BLUE_REEF_18B, FRONT_BLUE_REEF_19A, FRONT_BLUE_REEF_19B, FRONT_BLUE_REEF_20A,
+                FRONT_BLUE_REEF_20B, FRONT_BLUE_REEF_21A, FRONT_BLUE_REEF_21B, FRONT_BLUE_REEF_22A,
+                FRONT_BLUE_REEF_22B);
+
+        public static final List<Pose2d> BACK_BLUE_REEF = List.of(BACK_BLUE_REEF_17A, BACK_BLUE_REEF_17B,
+                BACK_BLUE_REEF_18A, BACK_BLUE_REEF_18B, BACK_BLUE_REEF_19A, BACK_BLUE_REEF_19B, BACK_BLUE_REEF_20A,
+                BACK_BLUE_REEF_20B, BACK_BLUE_REEF_21A, BACK_BLUE_REEF_21B, BACK_BLUE_REEF_22A,
+                BACK_BLUE_REEF_22B);
     }
 
     public static class AprilTagConstants {

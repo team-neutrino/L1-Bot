@@ -70,7 +70,7 @@ public class DriveToPoint extends Command {
     return false;
   }
 
-  public static Pose2d calculatePoint(Pose3d tagPose, boolean isPointA) {
+  public static Pose2d frontCalculatePoint(Pose3d tagPose, boolean isPointA) {
     double tagAngle = tagPose.getRotation().getAngle();
     double perpendicularTagAngle = tagAngle - Math.toRadians(90);
     double leftRightOffsetX = PARALLEL_OFFSET
@@ -80,14 +80,32 @@ public class DriveToPoint extends Command {
         * Math.sin(perpendicularTagAngle)
         + (REEF_WIDTH / 2) * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
 
-    double x = tagPose.getX() + PERPENDICULAR_OFFSET * Math.cos(tagAngle) + leftRightOffsetX;
-    double y = tagPose.getY() + PERPENDICULAR_OFFSET * Math.sin(tagAngle) + leftRightOffsetY;
+    double x = tagPose.getX() + FRONT_PERPENDICULAR_OFFSET * Math.cos(tagAngle) + leftRightOffsetX;
+    double y = tagPose.getY() + FRONT_PERPENDICULAR_OFFSET * Math.sin(tagAngle) + leftRightOffsetY;
 
     return new Pose2d(x, y, Rotation2d.fromRadians(tagAngle + Math.PI));
   }
 
+  public static Pose2d backCalculatePoint(Pose3d tagPose, boolean isPointA) {
+    double tagAngle = tagPose.getRotation().getAngle();
+    double perpendicularTagAngle = tagAngle - Math.toRadians(90);
+    double leftRightOffsetX = PARALLEL_OFFSET
+        * Math.cos(perpendicularTagAngle)
+        + (REEF_WIDTH / 2) * Math.cos(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+    double leftRightOffsetY = PARALLEL_OFFSET
+        * Math.sin(perpendicularTagAngle)
+        + (REEF_WIDTH / 2) * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+
+    double x = tagPose.getX() + BACK_PERPENDICULAR_OFFSET * Math.cos(tagAngle) + leftRightOffsetX;
+    double y = tagPose.getY() + BACK_PERPENDICULAR_OFFSET * Math.sin(tagAngle) + leftRightOffsetY;
+
+    return new Pose2d(x, y, Rotation2d.fromRadians(tagAngle));
+  }
+
   private void setTarget() {
-    m_pointControl.setTargetNearest(Constants.GlobalConstants.RED_ALLIANCE.get() ? RED_REEF : BLUE_REEF);
+    m_pointControl.setTargetNearest(
+        Subsystem.arm.isFront() ? (Constants.GlobalConstants.RED_ALLIANCE.get() ? FRONT_RED_REEF : FRONT_BLUE_REEF)
+            : (Constants.GlobalConstants.RED_ALLIANCE.get() ? BACK_RED_REEF : BACK_BLUE_REEF));
   }
 
   /*
@@ -118,18 +136,27 @@ public class DriveToPoint extends Command {
   private void setLocalList() {
     Pose2d target = m_pointControl.getTarget();
     System.out.println(target);
-    if (RED_REEF.contains(target)) {
-      m_localList = RED_REEF;
+    if (FRONT_RED_REEF.contains(target)) {
+      m_localList = FRONT_RED_REEF;
       return;
     }
-    if (BLUE_REEF.contains(target)) {
-      m_localList = BLUE_REEF;
+    if (FRONT_BLUE_REEF.contains(target)) {
+      m_localList = FRONT_BLUE_REEF;
+      return;
+    }
+    if (BACK_RED_REEF.contains(target)) {
+      m_localList = BACK_RED_REEF;
+      return;
+    }
+    if (BACK_BLUE_REEF.contains(target)) {
+      m_localList = BACK_BLUE_REEF;
       return;
     }
   }
 
   public void updateAtPoint() {
-    if ((Subsystem.limelight.getFrontTv() || Subsystem.limelight.getBackTv())&& Math.abs(m_pointControl.getStraightLineDist()) < AT_POINT_TOLERANCE) {
+    if ((Subsystem.limelight.getFrontTv() || Subsystem.limelight.getBackTv())
+        && Math.abs(m_pointControl.getStraightLineDist()) < AT_POINT_TOLERANCE) {
       m_swerve.setDrivingToPoint(false);
       m_swerve.setAtPoint(true);
     } else {

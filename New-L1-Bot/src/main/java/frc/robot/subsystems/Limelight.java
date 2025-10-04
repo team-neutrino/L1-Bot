@@ -27,20 +27,20 @@ public class Limelight extends SubsystemBase {
     LimelightHelpers.setLEDMode_ForceOff(FRONT_REEF_CAMERA);
     LimelightHelpers.setLEDMode_ForceOff(BACK_REEF_CAMERA);
     LimelightHelpers.setCameraPose_RobotSpace(FRONT_REEF_CAMERA,
-        FRONT_CAMERA_FORWARD_OFFSET, // Forward offset (meters)
-        FRONT_CAMERA_SIDE_OFFSET, // Side offset (meters) left is positive
-        FRONT_CAMERA_HEIGHT_OFFSET, // Height offset (meters)
-        FRONT_CAMERA_ROLL_OFFSET, // Roll (degrfees)
-        FRONT_CAMERA_PITCH_OFFSET, // Pitch (degrees)
-        FRONT_CAMERA_YAW_OFFSET // Yaw (degrees)
+        FRONT_CAMERA_FORWARD_OFFSET,
+        FRONT_CAMERA_SIDE_OFFSET, 
+        FRONT_CAMERA_HEIGHT_OFFSET, 
+        FRONT_CAMERA_ROLL_OFFSET, 
+        FRONT_CAMERA_PITCH_OFFSET, 
+        FRONT_CAMERA_YAW_OFFSET 
     );
     LimelightHelpers.setCameraPose_RobotSpace(BACK_REEF_CAMERA,
-        BACK_CAMERA_FORWARD_OFFSET, // Forward offset (meters)
-        BACK_CAMERA_SIDE_OFFSET, // Side offset (meters) left is positive
-        BACK_CAMERA_HEIGHT_OFFSET, // Height offset (meters)
-        BACK_CAMERA_ROLL_OFFSET, // Roll (degrfees)
-        BACK_CAMERA_PITCH_OFFSET, // Pitch (degrees)
-        BACK_CAMERA_YAW_OFFSET // Yaw (degrees)
+        BACK_CAMERA_FORWARD_OFFSET,
+        BACK_CAMERA_SIDE_OFFSET, 
+        BACK_CAMERA_HEIGHT_OFFSET, 
+        BACK_CAMERA_ROLL_OFFSET, 
+        BACK_CAMERA_PITCH_OFFSET, 
+        BACK_CAMERA_YAW_OFFSET 
     );
     LimelightHelpers.SetFiducialDownscalingOverride(FRONT_REEF_CAMERA, 3);
     LimelightHelpers.SetFiducialDownscalingOverride(BACK_REEF_CAMERA, 1);
