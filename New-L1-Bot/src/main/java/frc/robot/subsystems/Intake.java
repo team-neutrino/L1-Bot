@@ -69,7 +69,7 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_motor.set(HOLD_VOLTAGE);
+    m_motor.set(m_motorVoltage);
     m_debounced = m_debouncer.calculate(hasCoral());
   }
 
@@ -84,7 +84,7 @@ public class Intake extends SubsystemBase {
    */
   public Command intakeDefaultCommand() {
     return run(() -> {
-      m_motorVoltage = 0;
+      m_motorVoltage = HOLD_VOLTAGE;
     });
   }
 
