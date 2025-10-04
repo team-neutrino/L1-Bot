@@ -75,10 +75,10 @@ public class DriveToPoint extends Command {
     double perpendicularTagAngle = tagAngle - Math.toRadians(90);
     double leftRightOffsetX = PARALLEL_OFFSET
         * Math.cos(perpendicularTagAngle)
-        + (REEF_WIDTH / 2) * Math.cos(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+        + DISTANCE_BETWEEN_POINTS * Math.cos(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
     double leftRightOffsetY = PARALLEL_OFFSET
         * Math.sin(perpendicularTagAngle)
-        + (REEF_WIDTH / 2) * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+        + DISTANCE_BETWEEN_POINTS * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
 
     double x = tagPose.getX() + FRONT_PERPENDICULAR_OFFSET * Math.cos(tagAngle) + leftRightOffsetX;
     double y = tagPose.getY() + FRONT_PERPENDICULAR_OFFSET * Math.sin(tagAngle) + leftRightOffsetY;
@@ -91,10 +91,10 @@ public class DriveToPoint extends Command {
     double perpendicularTagAngle = tagAngle - Math.toRadians(90);
     double leftRightOffsetX = PARALLEL_OFFSET
         * Math.cos(perpendicularTagAngle)
-        + (REEF_WIDTH / 2) * Math.cos(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+        + DISTANCE_BETWEEN_POINTS * Math.cos(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
     double leftRightOffsetY = PARALLEL_OFFSET
         * Math.sin(perpendicularTagAngle)
-        + (REEF_WIDTH / 2) * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
+        + DISTANCE_BETWEEN_POINTS * Math.sin(perpendicularTagAngle + (isPointA ? 0 : Math.PI));
 
     double x = tagPose.getX() + BACK_PERPENDICULAR_OFFSET * Math.cos(tagAngle) + leftRightOffsetX;
     double y = tagPose.getY() + BACK_PERPENDICULAR_OFFSET * Math.sin(tagAngle) + leftRightOffsetY;
