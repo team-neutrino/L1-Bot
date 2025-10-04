@@ -87,7 +87,7 @@ public final class Constants {
         public static final double PARALLEL_OFFSET = 0.0; // Offsets points A and B in one direction
         public static final double FRONT_PERPENDICULAR_OFFSET = 0.3;
         public static final double BACK_PERPENDICULAR_OFFSET = 0.8;
-        public static final double DISTANCE_BETWEEN_POINTS = 0.2; //Offsets points A and B in opposite directions
+        public static final double DISTANCE_BETWEEN_POINTS = 0.22; //Offsets points A and B in opposite directions
         public static final double DRIVE_TO_POINT_P = 4.0;
         public static final double DRIVE_TO_POINT_I = 0.0;
         public static final double DRIVE_TO_POINT_D = 0.0;
