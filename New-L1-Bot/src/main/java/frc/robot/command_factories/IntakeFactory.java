@@ -17,7 +17,7 @@ public class IntakeFactory {
     }
 
     public static Command runOuttake() {
-        return intake.runIntake(OUTTAKE_VOLTAGE).until(() -> !(intake.debouncedHasCoral()));
+        return intake.runIntake(OUTTAKE_VOLTAGE);
     }
 
     public static Command runSoftOuttake() {
