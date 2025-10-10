@@ -83,6 +83,12 @@ public class Swerve extends CommandSwerveDrivetrain {
         .withRotationalRate(-driverController.getRightX() * MAX_ANGULAR_RATE));
   }
 
+  public Command slowDriveCommand(CommandXboxController driverController) {
+    return applyRequest(() -> SwerveRequestStash.drive.withVelocityX(-driverController.getLeftY() * SLOW_SPEED)
+        .withVelocityY(-driverController.getLeftX() * SLOW_SPEED)
+        .withRotationalRate(-driverController.getRightX() * SLOW_ANGULAR_RATE));
+  }
+
   public void setVelocity(double xVelocity, double yVelocity, Rotation2d targetDirection) {
     SwerveRequestStash.driveWithVelocity
         .withVelocityX(xVelocity)

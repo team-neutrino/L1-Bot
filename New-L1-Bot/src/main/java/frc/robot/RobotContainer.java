@@ -52,6 +52,7 @@ public class RobotContainer {
 
                 m_driverController.back().whileTrue(swerve.resetYawCommand());
                 m_driverController.b().whileTrue(new DriveToPoint(m_driverController));
+                m_driverController.leftTrigger().whileTrue(swerve.slowDriveCommand(m_driverController));
 
                 m_buttonController.x().whileTrue(SuperstructureFactory.IntakeCoral());
                 m_buttonController.y().toggleOnTrue(ArmFactory.ScorePositionBack());
