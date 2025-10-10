@@ -59,6 +59,10 @@ public class Arm extends SubsystemBase {
     return m_targetAngle;
   }
 
+  public boolean isFront() {
+    return getTargetAngle() < 90;
+  }
+
   public double getAngularVelocity() {
     return m_motor.getVelocity().getValueAsDouble();
   }
