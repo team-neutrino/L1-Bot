@@ -59,8 +59,8 @@ public final class Constants {
         public static class SwerveConstants {
                 public static final double MAX_SPEED = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
                 public static final double MAX_ANGULAR_RATE = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
-                public static final double SLOW_SPEED = 3;
-                public static final double SLOW_ANGULAR_RATE = 2;
+                public static final double SLOW_SPEED = 1;
+                public static final double SLOW_ANGULAR_RATE = 0.8;
         }
 
         public static class LimelightConstants {
