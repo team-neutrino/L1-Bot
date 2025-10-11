@@ -4,11 +4,16 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.commands.PathfindingCommand;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import frc.robot.Constants.DriveToPointConstants;
@@ -23,6 +28,7 @@ import static frc.robot.util.Subsystem.*;
 
 public class RobotContainer {
         private Subsystem subsystemContainer;
+        private Command m_autonPath;
 
         private final CommandXboxController m_driverController = new CommandXboxController(
                         OperatorConstants.kDriversControllerPort);
@@ -34,6 +40,11 @@ public class RobotContainer {
                 subsystemContainer = new Subsystem();
                 configureDefaultCommands();
                 configureBindings();
+                configureNamedCommand();
+                PathfindingCommand.warmupCommand().schedule();
+                // DataLogManager.start();
+                SignalLogger.enableAutoLogging(false);
+                m_autonPath = new PathPlannerAuto("Middle");
         }
 
         private void configureDefaultCommands() {
@@ -60,7 +71,26 @@ public class RobotContainer {
                 m_buttonController.leftBumper().whileTrue(IntakeFactory.runSoftOuttake());
         }
 
+        private void configureNamedCommand() {
+                NamedCommands.registerCommand("Score L1", IntakeFactory.runOuttake().until(() -> intake.debouncedHasCoral()));
+                NamedCommands.registerCommand("Move Arm Back", ArmFactory.ScorePositionBack().until(() -> arm.readyToScore() && intake.debouncedHasCoral()));
+                NamedCommands.registerCommand("DriveToPointForever",
+                                new DriveToPoint(m_driverController));
+        }
+
         public Command getAutonomousCommand() {
-                return Commands.print("No autonomous command configured");
+                Command auto;
+
+                if (Subsystem.swerve == null) {
+                        return new InstantCommand();
+                }
+                try {
+                        auto = m_autonPath;
+                } catch (Exception e) {
+                        System.err.println("Caught exception when loading auto");
+                        auto = new PathPlannerAuto("Nothing");
+                }
+
+                return auto;
         }
 }
