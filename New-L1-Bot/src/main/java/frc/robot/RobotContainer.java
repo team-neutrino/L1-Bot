@@ -73,9 +73,8 @@ public class RobotContainer {
 
         private void configureNamedCommand() {
                 NamedCommands.registerCommand("Score L1",
-                                IntakeFactory.runOuttake().until(() -> intake.debouncedHasCoral()));
-                NamedCommands.registerCommand("Move Arm Back", ArmFactory.ScorePositionBack()
-                                .until(() -> arm.readyToScore() && intake.debouncedHasCoral()));
+                                IntakeFactory.runOuttake().until(() -> !intake.debouncedHasCoral()));
+                NamedCommands.registerCommand("Move Arm Back", ArmFactory.ScorePositionBack());
                 NamedCommands.registerCommand("DriveToPointForever",
                                 new DriveToPoint(m_driverController));
                 NamedCommands.registerCommand("DriveToPoint",
