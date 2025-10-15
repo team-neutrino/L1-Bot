@@ -3,7 +3,46 @@
   "command": {
     "type": "sequential",
     "data": {
-      "commands": []
+      "commands": [
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Processor"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "DriveToPointForever"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move Arm Back"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": null
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
   },
   "resetOdom": true,

@@ -3,7 +3,71 @@
   "command": {
     "type": "sequential",
     "data": {
-      "commands": []
+      "commands": [
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Top"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move Arm Back"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "DriveToPoint"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Move Arm Back"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "DriveToPointForever"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score L1"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Arm In Frame Perimeter"
+          }
+        }
+      ]
     }
   },
   "resetOdom": true,

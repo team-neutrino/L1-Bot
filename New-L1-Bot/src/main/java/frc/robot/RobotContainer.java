@@ -44,7 +44,7 @@ public class RobotContainer {
                 PathfindingCommand.warmupCommand().schedule();
                 // DataLogManager.start();
                 SignalLogger.enableAutoLogging(false);
-                m_autonPath = new PathPlannerAuto("Middle");
+                m_autonPath = new PathPlannerAuto("Top");
         }
 
         private void configureDefaultCommands() {
@@ -72,10 +72,16 @@ public class RobotContainer {
         }
 
         private void configureNamedCommand() {
-                NamedCommands.registerCommand("Score L1", IntakeFactory.runOuttake().until(() -> intake.debouncedHasCoral()));
-                NamedCommands.registerCommand("Move Arm Back", ArmFactory.ScorePositionBack().until(() -> arm.readyToScore() && intake.debouncedHasCoral()));
+                NamedCommands.registerCommand("Score L1",
+                                IntakeFactory.runOuttake().until(() -> intake.debouncedHasCoral()));
+                NamedCommands.registerCommand("Move Arm Back", ArmFactory.ScorePositionBack()
+                                .until(() -> arm.readyToScore() && intake.debouncedHasCoral()));
                 NamedCommands.registerCommand("DriveToPointForever",
                                 new DriveToPoint(m_driverController));
+                NamedCommands.registerCommand("DriveToPoint",
+                                new DriveToPoint(m_driverController)
+                                                .until(() -> swerve.isAtPoint()));
+                NamedCommands.registerCommand("Arm In Frame Perimeter", ArmFactory.InFramePerimeter());
         }
 
         public Command getAutonomousCommand() {
