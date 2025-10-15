@@ -47,6 +47,10 @@ public class DriveToPoint extends Command {
     System.out.println("init");
   }
 
+  public double getDistanceProgress() {
+    return 1 - Math.abs(m_pointControl.getStraightLineDist()) / swerve.getOriginalDistance();
+  }
+
   @Override
   public void execute() {
     checkBumpers();
