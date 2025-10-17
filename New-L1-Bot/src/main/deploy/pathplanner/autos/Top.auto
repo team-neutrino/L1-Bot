@@ -62,9 +62,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Arm In Frame Perimeter"
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Arm In Frame Perimeter"
+                }
+              }
+            ]
           }
         }
       ]
