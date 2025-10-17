@@ -9,15 +9,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Processor"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Move Arm Back"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Processor"
                 }
               }
             ]
@@ -30,13 +30,13 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "DriveToPoint"
+                  "name": "Move Arm Back"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "Move Arm Back"
+                  "name": "DriveToPoint"
                 }
               }
             ]
