@@ -19,4 +19,8 @@ public class ArmFactory {
     public static Command ScorePositionBack() {
         return arm.armRotateCommand(BACK_SCORE_POSITION);
     }
+
+    public static Command InFramePerimeter() {
+        return arm.armRotateCommand(IN_PERIMETER);
+    }
 }

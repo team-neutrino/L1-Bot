@@ -54,6 +54,7 @@ public final class Constants {
                 public static final double START_POSITION = -7.0;
                 public static final double DEFAULT_POSITION = 16.0;
                 public static final double TOLERANCE = 2.0;
+                public static final double IN_PERIMETER = 48.4;
         }
 
         public static class SwerveConstants {
