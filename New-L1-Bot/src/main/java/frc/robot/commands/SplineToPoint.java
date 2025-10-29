@@ -7,13 +7,17 @@ package frc.robot.commands;
 import java.util.List;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.IdealStartingState;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.Waypoint;
+import com.pathplanner.lib.trajectory.PathPlannerTrajectory;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.Subsystem;
 
@@ -21,10 +25,12 @@ import frc.robot.util.Subsystem;
 public class SplineToPoint extends Command {
   private List<Waypoint> m_waypoints;
   private Command m_pathCommand;
+  private RobotConfig m_config;
 
   /** Creates a new Splinetopoint. */
   public SplineToPoint() {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_config = Subsystem.swerve.getRobotConfig();
   }
 
   // Called when the command is initially scheduled.
@@ -41,6 +47,8 @@ public class SplineToPoint extends Command {
         m_constraints,
         null,
         new GoalEndState(0.0, Rotation2d.fromDegrees(-90)));
+
+    path.generateTrajectory(new ChassisSpeeds(), new Rotation2d(), m_config);
     m_pathCommand = AutoBuilder.followPath(path);
   }
 
