@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import java.util.List;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.GoalEndState;
 import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
@@ -18,7 +19,8 @@ import frc.robot.util.Subsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SplineToPoint extends Command {
-  List<Waypoint> m_waypoints;
+  private List<Waypoint> m_waypoints;
+  private Command m_pathCommand;
 
   /** Creates a new Splinetopoint. */
   public SplineToPoint() {
@@ -39,11 +41,13 @@ public class SplineToPoint extends Command {
         m_constraints,
         null,
         new GoalEndState(0.0, Rotation2d.fromDegrees(-90)));
+    m_pathCommand = AutoBuilder.followPath(path);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_pathCommand.execute();
   }
 
   // Called once the command ends or is interrupted.
