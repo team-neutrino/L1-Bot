@@ -37,15 +37,15 @@ public class SplineToPoint extends Command {
   @Override
   public void initialize() {
     m_constraints = new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI);
-    m_target = new Pose2d(6, 7, new Rotation2d(0));
+    m_target = new Pose2d(2, 4, new Rotation2d(0));
 
     m_pathCommand = AutoBuilder.pathfindToPose(m_target, m_constraints);
+    m_pathCommand.schedule();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_pathCommand.schedule();
   }
 
   // Called once the command ends or is interrupted.
