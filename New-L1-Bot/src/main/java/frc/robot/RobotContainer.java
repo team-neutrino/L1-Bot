@@ -22,6 +22,7 @@ import frc.robot.command_factories.ArmFactory;
 import frc.robot.command_factories.IntakeFactory;
 import frc.robot.command_factories.SuperstructureFactory;
 import frc.robot.commands.DriveToPoint;
+import frc.robot.commands.SplineToPoint;
 import frc.robot.util.Subsystem;
 
 import static frc.robot.util.Subsystem.*;
@@ -64,6 +65,7 @@ public class RobotContainer {
                 m_driverController.back().whileTrue(swerve.resetYawCommand());
                 m_driverController.b().whileTrue(new DriveToPoint(m_driverController));
                 m_driverController.leftTrigger().whileTrue(swerve.slowDriveCommand(m_driverController));
+                m_driverController.a().whileTrue(new SplineToPoint());
 
                 m_buttonController.x().whileTrue(SuperstructureFactory.IntakeCoral());
                 m_buttonController.y().toggleOnTrue(ArmFactory.ScorePositionBack());

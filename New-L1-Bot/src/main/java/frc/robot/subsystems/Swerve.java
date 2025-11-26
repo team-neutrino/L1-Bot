@@ -38,6 +38,7 @@ public class Swerve extends CommandSwerveDrivetrain {
   private boolean m_isDrivingToPoint = false;
   private boolean m_isAtPoint = false;
   private Telemetry m_telemetry = new Telemetry(MAX_SPEED);
+  private RobotConfig m_robotConfig;
 
   public Swerve() {
     super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
@@ -59,7 +60,7 @@ public class Swerve extends CommandSwerveDrivetrain {
     PIDConstants rotationConstants = new PIDConstants(pRotation, iRotation, dRotation);
 
     try {
-      RobotConfig robotConfig = RobotConfig.fromGUISettings();
+      m_robotConfig = RobotConfig.fromGUISettings();
       AutoBuilder.configure(
           this::getCurrentPose,
           this::resetPose,
@@ -68,7 +69,7 @@ public class Swerve extends CommandSwerveDrivetrain {
           new PPHolonomicDriveController(
               translationConstants,
               rotationConstants),
-          robotConfig,
+          m_robotConfig,
           () -> {
             return GlobalConstants.RED_ALLIANCE.isPresent() && GlobalConstants.RED_ALLIANCE.get();
           },
@@ -93,6 +94,10 @@ public class Swerve extends CommandSwerveDrivetrain {
   public void resetYaw() {
     resetRotation(new Rotation2d(0));
     getPigeon2().reset();
+  }
+
+  public RobotConfig getRobotConfig() {
+    return m_robotConfig;
   }
 
   public Command resetYawCommand() {
