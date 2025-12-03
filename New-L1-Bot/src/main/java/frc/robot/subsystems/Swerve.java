@@ -21,6 +21,11 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.ctre.phoenix6.configs.CANrangeConfiguration;
+import com.ctre.phoenix6.configs.CANrangeConfigurator;
+import com.ctre.phoenix6.configs.ProximityParamsConfigs;
+import com.ctre.phoenix6.hardware.CANrange;
+import com.ctre.phoenix6.hardware.DeviceIdentifier;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.MathUtil;
@@ -39,6 +44,14 @@ public class Swerve extends CommandSwerveDrivetrain {
   private boolean m_isAtPoint = false;
   private Telemetry m_telemetry = new Telemetry(MAX_SPEED);
   private RobotConfig m_robotConfig;
+  private CANrange m_canRangeLeft = new CANrange(6, "Mold");
+  private CANrange m_canRangeRight = new CANrange(7, "Mold");
+  private CANrangeConfigurator m_canRangeConfiguratorLeft = new CANrangeConfigurator(
+      new DeviceIdentifier(11, "placeholder", "Mold"));
+  private CANrangeConfigurator m_canRangeConfiguratorRight = new CANrangeConfigurator(
+      new DeviceIdentifier(12, "placeholder", "Mold"));
+  private CANrangeConfiguration canRangeConfiguration = new CANrangeConfiguration()
+      .withProximityParams(new ProximityParamsConfigs().withProximityThreshold(5));
 
   public Swerve() {
     super(TunerConstants.DrivetrainConstants, TunerConstants.FrontLeft, TunerConstants.FrontRight,
@@ -154,6 +167,11 @@ public class Swerve extends CommandSwerveDrivetrain {
     setControl(SwerveRequestStash.driveWithVelocity);
   }
 
+  public void setRotationalRate(double rotationalRate) {
+    SwerveRequestStash.driveWithRotationalRate.withRotationalRate(rotationalRate);
+    setControl(SwerveRequestStash.driveWithRotationalRate);
+  }
+
   public void configureRequestPID() {
     SwerveRequestStash.driveWithVelocity.HeadingController.setPID(DRIVE_TO_POINT_P, DRIVE_TO_POINT_I, DRIVE_TO_POINT_D);
   }
@@ -165,6 +183,8 @@ public class Swerve extends CommandSwerveDrivetrain {
     public static final SwerveRequest.FieldCentricFacingAngle driveWithVelocity = new SwerveRequest.FieldCentricFacingAngle()
         .withDriveRequestType(DriveRequestType.Velocity).withForwardPerspective(ForwardPerspectiveValue.BlueAlliance);
     public static final SwerveRequest.RobotCentric autonDrive = new SwerveRequest.RobotCentric()
+        .withDriveRequestType(DriveRequestType.Velocity);
+    public static final SwerveRequest.FieldCentric driveWithRotationalRate = new SwerveRequest.FieldCentric()
         .withDriveRequestType(DriveRequestType.Velocity);
   }
 

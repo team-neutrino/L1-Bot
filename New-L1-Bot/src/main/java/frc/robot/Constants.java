@@ -62,6 +62,9 @@ public final class Constants {
                 public static final double MAX_ANGULAR_RATE = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
                 public static final double SLOW_SPEED = 1;
                 public static final double SLOW_ANGULAR_RATE = 0.8;
+                public static final double YAW_CORRECTION_P = 1;
+                public static final double YAW_CORRECTION_I = 0;
+                public static final double YAW_CORRECTION_D = 0;
         }
 
         public static class LimelightConstants {
