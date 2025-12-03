@@ -14,18 +14,26 @@ import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.Waypoint;
 import com.pathplanner.lib.trajectory.PathPlannerTrajectory;
+import com.pathplanner.lib.pathfinding.Pathfinding;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.math.Pair;
+import frc.robot.Constants;
 import frc.robot.util.Subsystem;
+
+import static frc.robot.Constants.DriveToPointConstants.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class SplineToPoint extends Command {
   private Command m_pathCommand;
   private Pose2d m_target;
   PathConstraints m_constraints;
+  private Translation2d m_obstacleA;
+  private Translation2d m_obstacleB;
 
   /** Creates a new Splinetopoint. */
   public SplineToPoint() {
@@ -37,10 +45,24 @@ public class SplineToPoint extends Command {
   @Override
   public void initialize() {
     m_constraints = new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI);
-    m_target = new Pose2d(2, 4, new Rotation2d(0));
-
+    m_target = getClosestPoint();
+    setObstacle();
     m_pathCommand = AutoBuilder.pathfindToPose(m_target, m_constraints);
     m_pathCommand.schedule();
+  }
+
+  public Pose2d getClosestPoint() {
+    return Subsystem.swerve.getCurrentPose().nearest(
+        Subsystem.arm.isFront() ? (Constants.GlobalConstants.RED_ALLIANCE.get() ? FRONT_RED_REEF : FRONT_BLUE_REEF)
+            : (Constants.GlobalConstants.RED_ALLIANCE.get() ? BACK_RED_REEF : BACK_BLUE_REEF));
+  }
+
+  public void setObstacle() {
+    m_obstacleA = new Translation2d(5.0, 5.0);
+    m_obstacleB = new Translation2d(7, 7);
+    Pair<Translation2d, Translation2d> pair = new Pair(m_obstacleA, m_obstacleB);
+    List<Pair<Translation2d, Translation2d>> obstacle = List.of(pair);
+    Pathfinding.setDynamicObstacles(obstacle, Subsystem.swerve.getCurrentPose().getTranslation());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
