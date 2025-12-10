@@ -47,9 +47,9 @@ public class Swerve extends CommandSwerveDrivetrain {
   private CANrange m_canRangeLeft = new CANrange(6, "Mold");
   private CANrange m_canRangeRight = new CANrange(7, "Mold");
   private CANrangeConfigurator m_canRangeConfiguratorLeft = new CANrangeConfigurator(
-      new DeviceIdentifier(11, "placeholder", "Mold"));
+      new DeviceIdentifier(6, "placeholder", "Mold"));
   private CANrangeConfigurator m_canRangeConfiguratorRight = new CANrangeConfigurator(
-      new DeviceIdentifier(12, "placeholder", "Mold"));
+      new DeviceIdentifier(7, "placeholder", "Mold"));
   private CANrangeConfiguration canRangeConfiguration = new CANrangeConfiguration()
       .withProximityParams(new ProximityParamsConfigs().withProximityThreshold(5));
 
@@ -60,6 +60,8 @@ public class Swerve extends CommandSwerveDrivetrain {
     configureRequestPID();
     registerTelemetry(m_telemetry::telemeterize);
     configurePathPlanner();
+    m_canRangeConfiguratorLeft.apply(canRangeConfiguration);
+    m_canRangeConfiguratorRight.apply(canRangeConfiguration);
   }
 
   private void configurePathPlanner() {
@@ -115,6 +117,14 @@ public class Swerve extends CommandSwerveDrivetrain {
 
   public Command resetYawCommand() {
     return run(() -> resetYaw());
+  }
+
+  public double getCANRangeLeftDistance() {
+    return m_canRangeLeft.getDistance().getValueAsDouble();
+  }
+
+  public double getCANRangeRightDistance() {
+    return m_canRangeRight.getDistance().getValueAsDouble();
   }
 
   public void setDrivingToPoint(boolean isDrivingToPoint) {

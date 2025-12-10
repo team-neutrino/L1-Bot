@@ -12,7 +12,6 @@ import com.pathplanner.lib.commands.PathfindingCommand;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
@@ -23,6 +22,7 @@ import frc.robot.command_factories.IntakeFactory;
 import frc.robot.command_factories.SuperstructureFactory;
 import frc.robot.commands.DriveToPoint;
 import frc.robot.commands.SplineToPoint;
+import frc.robot.commands.YawCorrect;
 import frc.robot.util.Subsystem;
 
 import static frc.robot.util.Subsystem.*;
@@ -66,6 +66,7 @@ public class RobotContainer {
                 m_driverController.b().whileTrue(new DriveToPoint(m_driverController));
                 m_driverController.leftTrigger().whileTrue(swerve.slowDriveCommand(m_driverController));
                 m_driverController.a().whileTrue(new SplineToPoint());
+                m_driverController.y().whileTrue(new YawCorrect());
 
                 m_buttonController.x().whileTrue(SuperstructureFactory.IntakeCoral());
                 m_buttonController.y().toggleOnTrue(ArmFactory.ScorePositionBack());
