@@ -34,6 +34,7 @@ public class SplineToPoint extends Command {
   PathConstraints m_constraints;
   private Translation2d m_obstacleA;
   private Translation2d m_obstacleB;
+  private List<Waypoint> m_waypoints;
 
   /** Creates a new Splinetopoint. */
   public SplineToPoint() {
@@ -47,6 +48,7 @@ public class SplineToPoint extends Command {
     m_constraints = new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI);
     m_target = getClosestPoint();
     setObstacle();
+
     m_pathCommand = AutoBuilder.pathfindToPose(m_target, m_constraints);
     m_pathCommand.schedule();
   }
@@ -58,7 +60,7 @@ public class SplineToPoint extends Command {
   }
 
   public void setObstacle() {
-    m_obstacleA = new Translation2d(5.0, 5.0);
+    m_obstacleA = new Translation2d(4, 4);
     m_obstacleB = new Translation2d(7, 7);
     Pair<Translation2d, Translation2d> pair = new Pair(m_obstacleA, m_obstacleB);
     List<Pair<Translation2d, Translation2d>> obstacle = List.of(pair);
